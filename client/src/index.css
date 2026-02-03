@@ -56,12 +56,13 @@
   --color-sidebar-ring: hsl(var(--sidebar-ring));
 }
 
-/* LIGHT MODE - University Professional Theme */
+/* LIGHT MODE - Cafeteria / Food-Friendly Theme */
 :root {
-  /* Deep Blue / Indigo - #1E40AF - 226 71% 40% */
-  /* Soft Yellow / Amber - #FBBF24 - 42 96% 56% */
-  /* Background - #F3F4F6 - 210 20% 96% */
-  /* Text - #111827 - 220 39% 14% */
+  /* Warm Orange / Terracotta - #F97316 - 24 95% 53% */
+  /* Fresh Green - #16A34A - 142 76% 36% */
+  /* Sunny Yellow - #FACC15 - 47 95% 53% */
+  /* Light Gray - #F3F4F6 - 210 20% 96% */
+  /* Warm Beige - #FFF7ED - 33 100% 96% */
   
   --background: 210 20% 96%;
   --foreground: 220 39% 14%;
@@ -72,21 +73,21 @@
   --popover: 0 0% 100%;
   --popover-foreground: 220 39% 14%;
 
-  /* Primary: Deep Blue */
-  --primary: 226 71% 40%;
-  --primary-foreground: 0 0% 98%;
+  /* Primary: Warm Orange */
+  --primary: 24 95% 53%;
+  --primary-foreground: 0 0% 100%;
 
-  /* Secondary: Soft Yellow/Amber */
-  --secondary: 42 96% 56%;
-  --secondary-foreground: 220 39% 14%;
+  /* Secondary: Fresh Green */
+  --secondary: 142 76% 36%;
+  --secondary-foreground: 0 0% 100%;
 
-  /* Muted: Gray */
-  --muted: 220 14% 94%;
+  /* Muted: Gray / Warm Beige */
+  --muted: 33 100% 96%;
   --muted-foreground: 220 8% 46%;
 
-  /* Accent: Lighter Blue or Amber depending on context, using light blue here for hover states */
-  --accent: 226 70% 94%;
-  --accent-foreground: 226 71% 40%;
+  /* Accent: Sunny Yellow */
+  --accent: 47 95% 53%;
+  --accent-foreground: 220 39% 14%;
 
   /* Destructive: Red */
   --destructive: 0 84% 60%;
@@ -94,65 +95,64 @@
 
   --border: 220 13% 91%;
   --input: 220 13% 91%;
-  --ring: 226 71% 40%;
+  --ring: 24 95% 53%;
 
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 
-  --chart-1: 12 76% 61%;
-  --chart-2: 173 58% 39%;
-  --chart-3: 197 37% 24%;
-  --chart-4: 43 74% 66%;
-  --chart-5: 27 87% 67%;
+  --chart-1: 24 95% 53%;
+  --chart-2: 142 76% 36%;
+  --chart-3: 47 95% 53%;
+  --chart-4: 33 100% 96%;
+  --chart-5: 220 8% 46%;
 
-  /* Sidebar: Deep Blue */
-  --sidebar: 226 71% 40%;
-  --sidebar-foreground: 210 40% 98%;
-  --sidebar-primary: 42 96% 56%;
+  /* Sidebar: Warm Orange */
+  --sidebar: 24 95% 53%;
+  --sidebar-foreground: 0 0% 100%;
+  --sidebar-primary: 47 95% 53%;
   --sidebar-primary-foreground: 220 39% 14%;
-  --sidebar-accent: 226 60% 35%;
-  --sidebar-accent-foreground: 210 40% 98%;
-  --sidebar-border: 226 60% 45%;
-  --sidebar-ring: 42 96% 56%;
+  --sidebar-accent: 24 90% 45%;
+  --sidebar-accent-foreground: 0 0% 100%;
+  --sidebar-border: 24 90% 48%;
+  --sidebar-ring: 47 95% 53%;
 }
 
 .dark {
-  /* Dark Mode Adjustments if needed, keeping similar hues but darker bg */
-  --background: 222 47% 11%;
-  --foreground: 210 40% 98%;
+  --background: 24 30% 10%;
+  --foreground: 33 100% 96%;
 
-  --card: 222 47% 11%;
-  --card-foreground: 210 40% 98%;
+  --card: 24 30% 12%;
+  --card-foreground: 33 100% 96%;
 
-  --popover: 222 47% 11%;
-  --popover-foreground: 210 40% 98%;
+  --popover: 24 30% 12%;
+  --popover-foreground: 33 100% 96%;
 
-  --primary: 226 71% 50%; /* Slightly lighter blue for dark mode visibility */
-  --primary-foreground: 210 40% 98%;
+  --primary: 24 95% 53%;
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 42 96% 56%;
-  --secondary-foreground: 220 39% 14%;
+  --secondary: 142 76% 36%;
+  --secondary-foreground: 0 0% 100%;
 
-  --muted: 217 33% 17%;
-  --muted-foreground: 215 20% 65%;
+  --muted: 24 30% 18%;
+  --muted-foreground: 24 10% 65%;
 
-  --accent: 217 33% 17%;
-  --accent-foreground: 210 40% 98%;
+  --accent: 47 95% 53%;
+  --accent-foreground: 220 39% 14%;
 
   --destructive: 0 62% 30%;
-  --destructive-foreground: 210 40% 98%;
+  --destructive-foreground: 33 100% 96%;
 
-  --border: 217 33% 17%;
-  --input: 217 33% 17%;
-  --ring: 226 71% 50%;
+  --border: 24 30% 18%;
+  --input: 24 30% 18%;
+  --ring: 24 95% 53%;
   
-  --sidebar: 222 47% 11%;
-  --sidebar-foreground: 210 40% 98%;
-  --sidebar-primary: 226 71% 50%;
+  --sidebar: 24 30% 10%;
+  --sidebar-foreground: 33 100% 96%;
+  --sidebar-primary: 24 95% 53%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 217 33% 17%;
-  --sidebar-accent-foreground: 210 40% 98%;
-  --sidebar-border: 217 33% 17%;
-  --sidebar-ring: 226 71% 50%;
+  --sidebar-accent: 24 30% 18%;
+  --sidebar-accent-foreground: 33 100% 96%;
+  --sidebar-border: 24 30% 18%;
+  --sidebar-ring: 24 95% 53%;
 }
 
 @layer base {
