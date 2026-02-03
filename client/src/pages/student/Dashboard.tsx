@@ -24,7 +24,7 @@ export default function StudentDashboard() {
             <p className="text-gray-500">Here's what's happening with your meals today.</p>
         </div>
         <Link href="/student/order">
-            <Button size="lg" className="bg-primary hover:bg-blue-800 shadow-lg hover:shadow-xl transition-all">
+            <Button size="lg" className="bg-primary hover:bg-orange-600 shadow-lg hover:shadow-xl transition-all">
                 Order Meal <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
         </Link>
@@ -32,25 +32,25 @@ export default function StudentDashboard() {
 
       <div className="grid md:grid-cols-3 gap-6">
         {/* Balance Card */}
-        <Card className="border-l-4 border-l-yellow-400 shadow-sm hover:shadow-md transition-shadow">
+        <Card className="border-l-4 border-l-accent shadow-soft hover:shadow-medium transition-shadow">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-              <Wallet className="h-4 w-4 text-yellow-500" /> Current Balance
+              <Wallet className="h-4 w-4 text-accent" /> Current Balance
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold text-primary">${student.balance.toFixed(2)}</div>
             <p className="text-xs text-muted-foreground mt-1">
-                {student.balance < 5 ? "Low balance - please top up soon." : "Sufficient funds for next meal."}
+                {student.balance < 5 ? "Low balance - please top up soon." : "Ready for your next delicious meal!"}
             </p>
           </CardContent>
         </Card>
 
         {/* Active Orders Card */}
-        <Card className="border-l-4 border-l-blue-500 shadow-sm hover:shadow-md transition-shadow">
+        <Card className="border-l-4 border-l-orange-500 shadow-soft hover:shadow-medium transition-shadow">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-              <Clock className="h-4 w-4 text-blue-500" /> Pending Orders
+              <Clock className="h-4 w-4 text-orange-500" /> Pending Orders
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -60,10 +60,10 @@ export default function StudentDashboard() {
         </Card>
 
         {/* Total Orders Card */}
-        <Card className="border-l-4 border-l-green-500 shadow-sm hover:shadow-md transition-shadow">
+        <Card className="border-l-4 border-l-secondary shadow-soft hover:shadow-medium transition-shadow">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-              <UtensilsCrossed className="h-4 w-4 text-green-500" /> Total Meals
+              <UtensilsCrossed className="h-4 w-4 text-secondary" /> Total Meals
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -114,23 +114,23 @@ export default function StudentDashboard() {
         </Card>
 
         {/* Quick Actions / Notifications */}
-        <Card className="shadow-sm bg-blue-50 border-blue-100">
+        <Card className="shadow-soft bg-orange-50 border-orange-100">
             <CardHeader>
                 <CardTitle className="text-lg text-primary">Notifications</CardTitle>
             </CardHeader>
             <CardContent>
                 <div className="space-y-3">
                     {student.balance < 10 && (
-                        <div className="bg-white p-3 rounded-md border border-blue-100 flex gap-3 shadow-sm">
-                            <div className="h-2 w-2 rounded-full bg-yellow-400 mt-2 shrink-0" />
+                        <div className="bg-white p-3 rounded-md border border-orange-100 flex gap-3 shadow-sm">
+                            <div className="h-2 w-2 rounded-full bg-accent mt-2 shrink-0" />
                             <div>
                                 <h4 className="font-medium text-sm text-gray-900">Low Balance Warning</h4>
                                 <p className="text-xs text-gray-500">Your balance is running low. Please visit the admin office to top up.</p>
                             </div>
                         </div>
                     )}
-                     <div className="bg-white p-3 rounded-md border border-blue-100 flex gap-3 shadow-sm">
-                        <div className="h-2 w-2 rounded-full bg-blue-400 mt-2 shrink-0" />
+                     <div className="bg-white p-3 rounded-md border border-orange-100 flex gap-3 shadow-sm">
+                        <div className="h-2 w-2 rounded-full bg-secondary mt-2 shrink-0" />
                         <div>
                             <h4 className="font-medium text-sm text-gray-900">New Menu Items</h4>
                             <p className="text-xs text-gray-500">Check out the new specials added to the menu this week!</p>

@@ -21,8 +21,8 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
       <Link href={href}>
         <a className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors ${
           isActive 
-            ? "bg-yellow-400 text-blue-900 font-semibold" 
-            : "text-blue-100 hover:bg-blue-800 hover:text-white"
+            ? "bg-accent text-gray-900 font-semibold shadow-sm" 
+            : "text-orange-100 hover:bg-orange-600 hover:text-white"
         }`}>
           <Icon className="h-4 w-4" />
           {label}
@@ -38,7 +38,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-8">
             <h1 className="font-serif font-bold text-xl tracking-wide flex items-center gap-2">
-              <span className="bg-yellow-400 text-blue-900 rounded p-1 w-8 h-8 flex items-center justify-center">U</span>
+              <span className="bg-accent text-gray-900 rounded p-1 w-8 h-8 flex items-center justify-center font-black">U</span>
               Meal System
             </h1>
             
@@ -54,7 +54,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
             {student && (
               <div className="hidden sm:flex flex-col items-end mr-2">
                 <span className="text-sm font-medium">{student.name}</span>
-                <span className="text-xs text-yellow-300 font-mono">
+                <span className="text-xs text-accent font-mono font-bold">
                   ${student.balance.toFixed(2)}
                 </span>
               </div>
@@ -63,7 +63,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
               variant="ghost" 
               size="icon" 
               onClick={logout}
-              className="text-blue-100 hover:bg-blue-800 hover:text-white"
+              className="text-orange-100 hover:bg-orange-600 hover:text-white"
             >
               <LogOut className="h-5 w-5" />
             </Button>
@@ -72,24 +72,24 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
       </header>
 
       {/* Mobile Nav (Bottom) */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-primary border-t border-blue-800 flex justify-around p-2 z-50">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-primary border-t border-orange-600 flex justify-around p-2 z-50 shadow-lg">
         <Link href="/student/dashboard">
-          <a className={`p-2 rounded ${location === '/student/dashboard' ? 'text-yellow-400' : 'text-blue-200'}`}>
+          <a className={`p-2 rounded ${location === '/student/dashboard' ? 'text-accent bg-orange-600' : 'text-orange-100'}`}>
             <LayoutDashboard className="h-6 w-6" />
           </a>
         </Link>
         <Link href="/student/menu">
-          <a className={`p-2 rounded ${location === '/student/menu' ? 'text-yellow-400' : 'text-blue-200'}`}>
+          <a className={`p-2 rounded ${location === '/student/menu' ? 'text-accent bg-orange-600' : 'text-orange-100'}`}>
             <UtensilsCrossed className="h-6 w-6" />
           </a>
         </Link>
         <Link href="/student/order">
-          <a className={`p-2 rounded ${location === '/student/order' ? 'text-yellow-400' : 'text-blue-200'}`}>
+          <a className={`p-2 rounded ${location === '/student/order' ? 'text-accent bg-orange-600' : 'text-orange-100'}`}>
             <ShoppingBag className="h-6 w-6" />
           </a>
         </Link>
         <Link href="/student/history">
-          <a className={`p-2 rounded ${location === '/student/history' ? 'text-yellow-400' : 'text-blue-200'}`}>
+          <a className={`p-2 rounded ${location === '/student/history' ? 'text-accent bg-orange-600' : 'text-orange-100'}`}>
             <History className="h-6 w-6" />
           </a>
         </Link>

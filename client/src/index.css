@@ -60,18 +60,18 @@
 :root {
   /* Warm Orange / Terracotta - #F97316 - 24 95% 53% */
   /* Fresh Green - #16A34A - 142 76% 36% */
-  /* Sunny Yellow - #FACC15 - 47 95% 53% */
+  /* Sunny Yellow - #FACC15 - 47 96% 53% */
   /* Light Gray - #F3F4F6 - 210 20% 96% */
   /* Warm Beige - #FFF7ED - 33 100% 96% */
   
   --background: 210 20% 96%;
-  --foreground: 220 39% 14%;
+  --foreground: 220 39% 11%;
 
   --card: 0 0% 100%;
-  --card-foreground: 220 39% 14%;
+  --card-foreground: 220 39% 11%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 220 39% 14%;
+  --popover-foreground: 220 39% 11%;
 
   /* Primary: Warm Orange */
   --primary: 24 95% 53%;
@@ -81,13 +81,13 @@
   --secondary: 142 76% 36%;
   --secondary-foreground: 0 0% 100%;
 
-  /* Muted: Gray / Warm Beige */
+  /* Muted: Warm Beige */
   --muted: 33 100% 96%;
   --muted-foreground: 220 8% 46%;
 
   /* Accent: Sunny Yellow */
-  --accent: 47 95% 53%;
-  --accent-foreground: 220 39% 14%;
+  --accent: 47 96% 53%;
+  --accent-foreground: 220 39% 11%;
 
   /* Destructive: Red */
   --destructive: 0 84% 60%;
@@ -101,19 +101,19 @@
 
   --chart-1: 24 95% 53%;
   --chart-2: 142 76% 36%;
-  --chart-3: 47 95% 53%;
+  --chart-3: 47 96% 53%;
   --chart-4: 33 100% 96%;
   --chart-5: 220 8% 46%;
 
   /* Sidebar: Warm Orange */
   --sidebar: 24 95% 53%;
   --sidebar-foreground: 0 0% 100%;
-  --sidebar-primary: 47 95% 53%;
-  --sidebar-primary-foreground: 220 39% 14%;
+  --sidebar-primary: 47 96% 53%;
+  --sidebar-primary-foreground: 220 39% 11%;
   --sidebar-accent: 24 90% 45%;
   --sidebar-accent-foreground: 0 0% 100%;
   --sidebar-border: 24 90% 48%;
-  --sidebar-ring: 47 95% 53%;
+  --sidebar-ring: 47 96% 53%;
 }
 
 .dark {
@@ -135,8 +135,8 @@
   --muted: 24 30% 18%;
   --muted-foreground: 24 10% 65%;
 
-  --accent: 47 95% 53%;
-  --accent-foreground: 220 39% 14%;
+  --accent: 47 96% 53%;
+  --accent-foreground: 220 39% 11%;
 
   --destructive: 0 62% 30%;
   --destructive-foreground: 33 100% 96%;
@@ -161,5 +161,56 @@
   }
   body {
     @apply font-sans antialiased bg-background text-foreground;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Better focus states */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2;
+  }
+}
+
+@layer utilities {
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md border border-white/20;
+  }
+  
+  /* Gradient backgrounds */
+  .gradient-primary {
+    @apply bg-gradient-to-br from-primary to-primary/80;
+  }
+  
+  .gradient-accent {
+    @apply bg-gradient-to-br from-accent to-amber-400;
+  }
+  
+  /* Shadow utilities */
+  .shadow-soft {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  }
+  
+  .shadow-medium {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+  
+  /* Animations */
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

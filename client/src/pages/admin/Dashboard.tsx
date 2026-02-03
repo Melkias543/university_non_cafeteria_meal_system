@@ -86,20 +86,20 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent className="space-y-2">
                 <div className="grid grid-cols-2 gap-2">
-                    <div className="bg-blue-50 p-4 rounded-lg text-center hover:bg-blue-100 cursor-pointer transition-colors border border-blue-100">
+                    <div className="bg-orange-50 p-4 rounded-lg text-center hover:bg-orange-100 cursor-pointer transition-colors border border-orange-100">
                         <Users className="h-6 w-6 mx-auto mb-2 text-primary" />
                         <span className="text-sm font-medium">Add Student</span>
                     </div>
                     <div className="bg-yellow-50 p-4 rounded-lg text-center hover:bg-yellow-100 cursor-pointer transition-colors border border-yellow-100">
-                         <DollarSign className="h-6 w-6 mx-auto mb-2 text-yellow-600" />
+                         <DollarSign className="h-6 w-6 mx-auto mb-2 text-accent" />
                         <span className="text-sm font-medium">Top Up</span>
                     </div>
                      <div className="bg-green-50 p-4 rounded-lg text-center hover:bg-green-100 cursor-pointer transition-colors border border-green-100">
-                         <Utensils className="h-6 w-6 mx-auto mb-2 text-green-600" />
+                         <Utensils className="h-6 w-6 mx-auto mb-2 text-secondary" />
                         <span className="text-sm font-medium">Add Menu Item</span>
                     </div>
-                     <div className="bg-purple-50 p-4 rounded-lg text-center hover:bg-purple-100 cursor-pointer transition-colors border border-purple-100">
-                         <ShoppingCart className="h-6 w-6 mx-auto mb-2 text-purple-600" />
+                     <div className="bg-amber-50 p-4 rounded-lg text-center hover:bg-amber-100 cursor-pointer transition-colors border border-amber-100">
+                         <ShoppingCart className="h-6 w-6 mx-auto mb-2 text-amber-600" />
                         <span className="text-sm font-medium">Review Orders</span>
                     </div>
                 </div>

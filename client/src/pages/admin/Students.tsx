@@ -55,7 +55,7 @@ export default function AdminStudents() {
         
         <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-primary hover:bg-blue-800">
+            <Button className="bg-primary hover:bg-orange-600 shadow-md">
                 <UserPlus className="mr-2 h-4 w-4" /> Add Student
             </Button>
           </DialogTrigger>
