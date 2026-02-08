@@ -1,4 +1,4 @@
-import { Link, useLocation } from "wouter";
+import { Link, useLocation } from "react-router-dom";
 import { useData } from "@/context/DataContext";
 import { Button } from "@/components/ui/button";
 import { 
@@ -16,17 +16,15 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
   const student = currentUser?.id ? getStudent(currentUser.id) : null;
 
   const NavItem = ({ href, icon: Icon, label }: { href: string; icon: any; label: string }) => {
-    const isActive = location === href;
+    const isActive = location.pathname === href;
     return (
-      <Link href={href}>
-        <a className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors ${
-          isActive 
-            ? "bg-accent text-gray-900 font-semibold shadow-sm" 
-            : "text-orange-100 hover:bg-orange-600 hover:text-white"
-        }`}>
-          <Icon className="h-4 w-4" />
-          {label}
-        </a>
+      <Link to={href} className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors ${
+        isActive 
+          ? "bg-accent text-gray-900 font-semibold shadow-sm" 
+          : "text-orange-100 hover:bg-orange-600 hover:text-white"
+      }`}>
+        <Icon className="h-4 w-4" />
+        {label}
       </Link>
     );
   };
@@ -73,25 +71,17 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
 
       {/* Mobile Nav (Bottom) */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-primary border-t border-orange-600 flex justify-around p-2 z-50 shadow-lg">
-        <Link href="/student/dashboard">
-          <a className={`p-2 rounded ${location === '/student/dashboard' ? 'text-accent bg-orange-600' : 'text-orange-100'}`}>
-            <LayoutDashboard className="h-6 w-6" />
-          </a>
+        <Link to="/student/dashboard" className={`p-2 rounded ${location.pathname === '/student/dashboard' ? 'text-accent bg-orange-600' : 'text-orange-100'}`}>
+          <LayoutDashboard className="h-6 w-6" />
         </Link>
-        <Link href="/student/menu">
-          <a className={`p-2 rounded ${location === '/student/menu' ? 'text-accent bg-orange-600' : 'text-orange-100'}`}>
-            <UtensilsCrossed className="h-6 w-6" />
-          </a>
+        <Link to="/student/menu" className={`p-2 rounded ${location.pathname === '/student/menu' ? 'text-accent bg-orange-600' : 'text-orange-100'}`}>
+          <UtensilsCrossed className="h-6 w-6" />
         </Link>
-        <Link href="/student/order">
-          <a className={`p-2 rounded ${location === '/student/order' ? 'text-accent bg-orange-600' : 'text-orange-100'}`}>
-            <ShoppingBag className="h-6 w-6" />
-          </a>
+        <Link to="/student/order" className={`p-2 rounded ${location.pathname === '/student/order' ? 'text-accent bg-orange-600' : 'text-orange-100'}`}>
+          <ShoppingBag className="h-6 w-6" />
         </Link>
-        <Link href="/student/history">
-          <a className={`p-2 rounded ${location === '/student/history' ? 'text-accent bg-orange-600' : 'text-orange-100'}`}>
-            <History className="h-6 w-6" />
-          </a>
+        <Link to="/student/history" className={`p-2 rounded ${location.pathname === '/student/history' ? 'text-accent bg-orange-600' : 'text-orange-100'}`}>
+          <History className="h-6 w-6" />
         </Link>
       </nav>
 

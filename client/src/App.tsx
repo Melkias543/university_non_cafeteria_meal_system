@@ -1,9 +1,9 @@
-import { Switch, Route } from "wouter";
+import { Routes, Route } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { DataProvider } from "./context/DataContext";
-import Login from "./pages/Login";
+import Login from "./pages/auth/Login";
 import NotFound from "./pages/not-found";
 import StudentLayout from "./components/layout/StudentLayout";
 import AdminLayout from "./components/layout/AdminLayout";
@@ -16,45 +16,131 @@ import AdminStudents from "./pages/admin/Students";
 import AdminMenu from "./pages/admin/Menu";
 import AdminOrders from "./pages/admin/Orders";
 import AdminReports from "./pages/admin/Reports";
+import LandingPage from "./pages/landinPages";
+import Register from "./pages/auth/Register";
+import {
+  ProtectedRoute,
+  StudentPages,
+  AdminPages,
+} from "./Routes/protectedRoutes";
 
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Login} />
-      
-      {/* Student Routes */}
-      <Route path="/student/dashboard">
-        <StudentLayout><StudentDashboard /></StudentLayout>
-      </Route>
-      <Route path="/student/menu">
-        <StudentLayout><StudentMenu /></StudentLayout>
-      </Route>
-      <Route path="/student/order">
-        <StudentLayout><StudentOrder /></StudentLayout>
-      </Route>
-      <Route path="/student/history">
-        <StudentLayout><StudentHistory /></StudentLayout>
+    //   <Routes>
+    //     <Route path="/" element={<LandingPage />} />
+    //     <Route path="/login" element={<Login />} />
+    //     <Route path="/register" element={<Register />} />
+
+    //     Student Routes
+    //     <Route element={<ProtectedRoute/><StudentPages />}>
+    //       <Route path="/student/dashboard" element={<StudentLayout><StudentDashboard /></StudentLayout>} />
+    //       <Route path="/student/menu" element={<StudentLayout><StudentMenu /></StudentLayout>} />
+    //       <Route path="/student/order" element={<StudentLayout><StudentOrder /></StudentLayout>} />
+    //       <Route path="/student/history" element={<StudentLayout><StudentHistory /></StudentLayout>} />
+    //     </Route>
+
+    //     {/* Admin Routes */}
+    //   <Route element={<ProtectedRoute/><AdminPages />}>
+    // <Route path="/admin/dashboard" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
+    // <Route path="/admin/students" element={<AdminLayout><AdminStudents /></AdminLayout>} />
+    // <Route path="/admin/menu" element={<AdminLayout><AdminMenu /></AdminLayout>} />
+    // <Route path="/admin/orders" element={<AdminLayout><AdminOrders /></AdminLayout>} />
+    // <Route path="/admin/reports" element={<AdminLayout><AdminReports /></AdminLayout>} />
+
+    //     <Route path="*" element={<NotFound />} />
+    //   </Routes>
+
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
+      {/* ---------------- STUDENT ---------------- */}
+      <Route element={<ProtectedRoute />}>
+        <Route element={<StudentPages />}>
+          <Route
+            path="/student/dashboard"
+            element={
+              <StudentLayout>
+                <StudentDashboard />
+              </StudentLayout>
+            }
+          />
+          <Route
+            path="/student/menu"
+            element={
+              <StudentLayout>
+                <StudentMenu />
+              </StudentLayout>
+            }
+          />
+          <Route
+            path="/student/order"
+            element={
+              <StudentLayout>
+                <StudentOrder />
+              </StudentLayout>
+            }
+          />
+          <Route
+            path="/student/history"
+            element={
+              <StudentLayout>
+                <StudentHistory />
+              </StudentLayout>
+            }
+          />
+        </Route>
       </Route>
 
-      {/* Admin Routes */}
-      <Route path="/admin/dashboard">
-        <AdminLayout><AdminDashboard /></AdminLayout>
-      </Route>
-      <Route path="/admin/students">
-        <AdminLayout><AdminStudents /></AdminLayout>
-      </Route>
-      <Route path="/admin/menu">
-        <AdminLayout><AdminMenu /></AdminLayout>
-      </Route>
-      <Route path="/admin/orders">
-        <AdminLayout><AdminOrders /></AdminLayout>
-      </Route>
-      <Route path="/admin/reports">
-        <AdminLayout><AdminReports /></AdminLayout>
+      {/* ---------------- ADMIN ---------------- */}
+      <Route element={<ProtectedRoute />}>
+        <Route element={<AdminPages />}>
+          <Route
+            path="/admin/dashboard"
+            element={
+              <AdminLayout>
+                <AdminDashboard />
+              </AdminLayout>
+            }
+          />
+          <Route
+            path="/admin/students"
+            element={
+              <AdminLayout>
+                <AdminStudents />
+              </AdminLayout>
+            }
+          />
+          <Route
+            path="/admin/menu"
+            element={
+              <AdminLayout>
+                <AdminMenu />
+              </AdminLayout>
+            }
+          />
+          <Route
+            path="/admin/orders"
+            element={
+              <AdminLayout>
+                <AdminOrders />
+              </AdminLayout>
+            }
+          />
+          <Route
+            path="/admin/reports"
+            element={
+              <AdminLayout>
+                <AdminReports />
+              </AdminLayout>
+            }
+          />
+        </Route>
       </Route>
 
-      <Route component={NotFound} />
-    </Switch>
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 

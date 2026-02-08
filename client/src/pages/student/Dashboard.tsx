@@ -1,6 +1,6 @@
 import { useData } from "@/context/DataContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, UtensilsCrossed, Clock, Wallet } from "lucide-react";
 
@@ -23,7 +23,7 @@ export default function StudentDashboard() {
             <h1 className="text-3xl font-serif font-bold text-gray-900">Welcome, {student.name.split(' ')[0]}</h1>
             <p className="text-gray-500">Here's what's happening with your meals today.</p>
         </div>
-        <Link href="/student/order">
+        <Link to="/student/order">
             <Button size="lg" className="bg-primary hover:bg-orange-600 shadow-lg hover:shadow-xl transition-all">
                 Order Meal <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
@@ -106,7 +106,7 @@ export default function StudentDashboard() {
                     <p className="text-muted-foreground text-sm">No recent orders found.</p>
                 )}
                 <div className="mt-4 pt-2 border-t text-center">
-                    <Link href="/student/history">
+                    <Link to="/student/history">
                         <Button variant="link" size="sm" className="text-primary">View All History</Button>
                     </Link>
                 </div>

@@ -5,12 +5,12 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import { Link, useLocation } from "wouter";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function StudentMenu() {
   const { menu, currentUser, placeOrder } = useData();
   const { toast } = useToast();
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
   const [cart, setCart] = useState<{item: any, quantity: number}[]>([]);
 
   const addToCart = (item: any) => {
@@ -33,7 +33,7 @@ export default function StudentMenu() {
     // Or just make this the Order page?
     // The prompt separates "Menu" and "Order".
     // I will treat "Menu" as a "Browse" page, and clicking "Order Now" takes you to the Order page.
-    setLocation('/student/order');
+    navigate('/student/order');
   };
 
   const categories = Array.from(new Set(menu.map(item => item.category)));
@@ -42,7 +42,7 @@ export default function StudentMenu() {
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-serif font-bold text-gray-900">Today's Menu</h1>
-        <Link href="/student/order">
+        <Link to="/student/order">
             <Button>Go to Order Page</Button>
         </Link>
       </div>

@@ -1,4 +1,4 @@
-import { Link, useLocation } from "wouter";
+import { Link, useLocation } from "react-router-dom";
 import { useData } from "@/context/DataContext";
 import { Button } from "@/components/ui/button";
 import { 
@@ -46,17 +46,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   );
 
   const NavItem = ({ href, icon: Icon, label }: { href: string; icon: any; label: string }) => {
-    const isActive = location === href;
+    const isActive = location.pathname === href;
     return (
-      <Link href={href}>
-        <a className={`flex items-center gap-3 px-4 py-3 rounded-md transition-all ${
-          isActive 
-            ? "bg-accent text-gray-900 font-bold shadow-md" 
-            : "text-orange-100 hover:bg-orange-600 hover:pl-6"
-        }`}>
-          <Icon className="h-5 w-5" />
-          {label}
-        </a>
+      <Link to={href} className={`flex items-center gap-3 px-4 py-3 rounded-md transition-all ${
+        isActive 
+          ? "bg-accent text-gray-900 font-bold shadow-md" 
+          : "text-orange-100 hover:bg-orange-600 hover:pl-6"
+      }`}>
+        <Icon className="h-5 w-5" />
+        {label}
       </Link>
     );
   };
