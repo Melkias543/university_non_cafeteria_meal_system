@@ -6,13 +6,13 @@ import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { useState } from "react";
-import { useLocation } from "wouter";
+import { useNavigate } from "react-router-dom";
 import { MenuItem } from "@/types";
 
 export default function StudentOrder() {
   const { menu, currentUser, placeOrder, getStudent } = useData();
   const { toast } = useToast();
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
   const [cart, setCart] = useState<{item: MenuItem, quantity: number}[]>([]);
   const student = currentUser?.id ? getStudent(currentUser.id) : null;
 
@@ -47,7 +47,7 @@ export default function StudentOrder() {
     try {
       await placeOrder(currentUser.id, cart);
       setCart([]);
-      setLocation('/student/history'); // Or to a success page / QR display
+      navigate('/student/history'); // Or to a success page / QR display
     } catch (error) {
       // Error handled in context
     }
