@@ -28,7 +28,6 @@ class User extends Authenticatable
     protected $fillable = [
         'full_name',
         'status', 
-         'role_id',
         'email',
         'password',
     
@@ -61,4 +60,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserProfile::class);
     }
+
+    public function wallet() { return $this->hasOne(Wallet::class); }
+    public function orders() { return $this->hasMany(Order::class); }
+    public function deposits() { return $this->hasMany(Deposit::class); }
+    public function transactions() { return $this->hasMany(Transaction::class); }
+    public function qrLogs() { return $this->hasMany(QrLog::class,'scanned_by'); }
+    
+    
+    
+    
 }

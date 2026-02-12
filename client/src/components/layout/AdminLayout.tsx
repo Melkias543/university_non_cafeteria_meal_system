@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useData } from "@/context/DataContext";
 import { Button } from "@/components/ui/button";
 import { 
@@ -15,7 +15,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { logout } = useData();
-  const [location] = useLocation();
+  // const [location] = useLocation();
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full text-white">

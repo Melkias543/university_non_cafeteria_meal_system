@@ -4,48 +4,64 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\UserProfile;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     public function run(): void
-
     {
-        // 1️⃣ Create roles if they don't exist
-        $adminRole = Role::where('name', 'admin')->first();
-        $adminRole = Role::where('name', 'admin')->where('guard_name', 'sanctum')->first();
+        $this->call(RoleSeeder::class);
+        // Roles (sanctum guard)
+        $adminRole = Role::where('name', 'admin')
+            ->where('guard_name', 'sanctum')
+            ->firstOrFail();
 
-        // 2️⃣ Create an admin user
+        $studentRole = Role::where('name', 'student')
+            ->where('guard_name', 'sanctum')
+            ->firstOrFail();
+
+        // Admin
         $admin = User::firstOrCreate(
-            ['email' => 'admin@gmail.com'], // unique field
+            ['email' => 'admin@gmail.com'],
             [
                 'full_name' => 'Admin User',
-                'password' => Hash::make('password123'), // change this!
-                'role_id' => $adminRole->id,
+                'password' => Hash::make('password123'),
             ]
         );
 
-        // 3️⃣ Assign the admin role
-        $admin->assignRole($adminRole);
-        // 4️⃣ Create a user profile for admin (1:1)
+        if (! $admin->hasRole('admin')) {
+            $admin->assignRole($adminRole);
+        }
+
         UserProfile::firstOrCreate(
             ['user_id' => $admin->id],
             [
-                'photo_url' => null,
                 'phone' => '0000000000',
                 'department' => 'Administration',
             ]
         );
 
-        // 5️⃣ Optional: create dummy users
-        // User::factory(10)->create()->each(function ($user) use ($userRole) {
-        //     $user->assignRole($userRole);
-        //     UserProfile::factory()->create(['user_id' => $user->id]);
-        // });
+        // Student
+        $student = User::firstOrCreate(
+            ['email' => 'student@gmail.com'],
+            [
+                'full_name' => 'Student User',
+                'password' => Hash::make('password123'),
+            ]
+        );
+
+        if (! $student->hasRole('student')) {
+            $student->assignRole($studentRole);
+        }
+
+        UserProfile::firstOrCreate(
+            ['user_id' => $student->id],
+            [
+                'phone' => '1111111111',
+                'department' => 'Computer Science',
+            ]
+        );
     }
 }
