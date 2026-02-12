@@ -8,15 +8,7 @@ export interface Student {
   studentId: string; // The visible ID (e.g., "STU-001")
 }
 
-export interface MenuItem {
-  id: number;
-  name: string;
-  description?: string;
-  price: number;
-  category: string;
-  image?: string;
-  is_available: boolean;
-}
+
 
 export type OrderStatus = 'pending' | 'approved' | 'rejected' | 'completed';
 

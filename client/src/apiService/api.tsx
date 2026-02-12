@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://127.0.0.1:8000/api",
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -12,6 +12,9 @@ api.interceptors.request.use((config) => {
   const rawData = localStorage.getItem("authData");
 // console.log("rawData:",   rawData);
   // If rawData is null, just return the config without adding the header
+  if (config.data instanceof FormData) {
+    delete config.headers["Content-Type"];
+  }
   if (!rawData) {
     return config;
   }
