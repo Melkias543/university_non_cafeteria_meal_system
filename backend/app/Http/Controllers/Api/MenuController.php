@@ -17,8 +17,27 @@ class MenuController extends Controller
 {
     /**
      * Display a listing of the menu items.
+     * 
      */
-    public function index()
+
+public function menu_student(){
+
+        $menus = Menu::where('is_available', true)
+            ->latest()
+            ->paginate(10);
+        return response()->json([
+        'success' => true,
+        'data' => $menus
+    ]);
+
+
+}
+
+
+
+
+
+public function index()
     {
         // Use pagination for professional APIs to prevent memory crashes
         $menus = Menu::latest()->paginate(15);

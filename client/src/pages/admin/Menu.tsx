@@ -22,6 +22,7 @@ export default function AdminMenu() {
   const [isOpen, setIsopen] = useState(false);
 const [menus, setMenus] = useState<MenuItemInput|[]>([]);
 const imageUrl = import.meta.env.VITE_IMAGE_API_URL;
+
 const [pagination, setPagination] = useState({
   currentPage: 1,
   lastPage: 1,

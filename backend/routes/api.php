@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DepositController;
 use App\Http\Controllers\Api\MenuController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Controller; // ✅ Correct
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\WalletController;
 use App\Models\User;
 use GuzzleHttp\Middleware;
 use Symfony\Component\Routing\Route as RoutingRoute;
@@ -58,6 +60,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::put('/users/{user}', [UserController::class, 'update'])->middleware("role:admin");
     Route::get('/users/{user}', [UserController::class, 'show'])->middleware("role:admin");
+    Route::get('/student-menu', [MenuController::class, 'menu_student']);
+    Route::get('/user/balance', [WalletController::class, 'showByBalanceToStudent']);
+    Route::post('/orders', [OrderController::class, 'store']);
     /*
     |---------------------------------------
     | Admin Only Routes

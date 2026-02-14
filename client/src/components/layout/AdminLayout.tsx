@@ -12,11 +12,12 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useAuth } from "@/feature/Context/authContext";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  const { logout } = useData();
+  // const { logout } = useData();
   // const [location] = useLocation();
-
+const {logout} = useAuth()
   const SidebarContent = () => (
     <div className="flex flex-col h-full text-white">
       <div className="p-6 border-b border-orange-600">

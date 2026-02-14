@@ -18,21 +18,41 @@ class QrLog extends Model
 
     protected $fillable = ['order_id', 'scanned_by', 'scanned_at', 'is_valid', 'expired_at'];
 
+    protected $casts = [
+        'scanned_at' => 'datetime',
+        'expired_at' => 'datetime',
+        'is_valid' => 'boolean',
+    ];
+
 public static function booted()
     {
         static::creating(fn($model) => $model->id = $model->id ?? (string) Str::uuid());
+
+
+        static::creating(function ($qrLog) {
+            if (!$qrLog->expired_at) {
+                $qrLog->expired_at = now()->addHours(2);
+            }
+        });
+        
     }
 
     public function order()
     {
         return $this->belongsTo(Order::class);
     }
-    public function admin()
+
+
+    // Optional: mark as scanned
+    // public function markAsScanned($userId)
+    // {
+    //     $this->update([
+    //         'scanned_by' => $userId,
+    //         'scanned_at' => now(),
+    //     ]);
+    // }
+    public function scannedBy()
     {
         return $this->belongsTo(User::class, 'scanned_by');
     }
-
-
-
-
 }
