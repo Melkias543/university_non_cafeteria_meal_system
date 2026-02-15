@@ -18,6 +18,20 @@ class OrderController extends Controller
     /**
      * Display a listing of the orders with items.
      */
+
+public function myOrder($user_id){
+    $orders = Order::with('items.menu')
+    ->where('user_id', $user_id)
+    ->latest()
+    ->get();
+
+    return response()->json([
+        'success' => true,
+        'data' => $orders
+    ]);
+
+}
+
     public function index()
     {
         $orders = Order::with('items.menu')->latest()->get();
@@ -28,251 +42,7 @@ class OrderController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created order with items.
-     */
-    // public function store(Request $request)
-
-    // //   $table->uuid('id')->primary();
-    // //         $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
-    // //         $table->decimal('total_price', 10, 2);
-    // //         $table->enum('status', ['pending', 'approved', 'rejected', 'used'])->default('pending');
-    // //         $table->timestamps();
-    // //  $table->uuid('id')->primary();
-    // //         $table->uuid('order_id');
-    // //         $table->uuid('menu_id');
-    // //         $table->integer('quantity');
-    // //         $table->decimal('price', 10, 2);
-    // //         $table->timestamps();
-
-    // //         $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-    // //         $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
-    // {
-    //     $request->validate([
-    //         'user_id' => 'required|exists:users,id',
-    //         'items' => 'required|array|min:1',
-    //         'total_price'=> 'required|numeric|min:0',
-    //         'status' => 'required|in:pending,approved,rejected,used',
-    //         'items.*.menu_id' => 'required|exists:menus,id',
-    //         'items.*.quantity' => 'required|integer|min:1',
-    //         'items.*.price' => 'required|numeric|min:0'
-    //     ]);
-
-    //     DB::beginTransaction();
-    //     try {
-    //         $totalPrice = collect($request->items)->sum(function ($item) {
-    //             return $item['quantity'] * $item['price'];
-    //         });
-
-    //         $order = Order::create([
-    //             'user_id' => $request->user_id,
-    //             'total_price' => $totalPrice,
-    //             'status' => 'pending'
-    //         ]);
-
-    //         foreach ($request->items as $item) {
-    //             OrderItem::create([
-    //                 'order_id' => $order->id,
-    //                 'menu_id' => $item['menu_id'],
-    //                 'quantity' => $item['quantity'],
-    //                 'price' => $item['price']
-    //             ]);
-    //         }
-
-    //         DB::commit();
-
-    //         return response()->json([
-    //             'success' => true,
-    //             'message' => 'Order created successfully',
-    //             'data' => $order->load('items.menu')
-    //         ], 201);
-    //     } catch (\Exception $e) {
-    //         DB::rollBack();
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Failed to create order',
-    //             'error' => $e->getMessage()
-    //         ], 500);
-    //     }
-    // }
-
-
-
-    // public function store(Request $request)
-    // {
-    //                     $validated = $request->validate([
-    //                         'total_price' => 'required|numeric|min:0',
-
-    //                         'items' => 'required|array|min:1',
-    //                         'items.*.id' => 'required|exists:menus,id',
-    //                         'items.*.quantity' => 'required|integer|min:1',
-    //                         'items.*.price' => 'required|numeric|min:0',
-    //                     ]);
-
-    //                     DB::beginTransaction();
-
-    //                     try {
-
-    //                         /*
-    //                     OPTIONAL SECURITY CHECK
-    //                     verifies frontend total matches items total
-    //                     (recommended but can be removed if not needed)
-    //                     */
-    //                         $calculatedTotal = collect($validated['items'])->sum(function ($item) {
-    //                             return $item['quantity'] * $item['price'];
-    //                         });
-
-    //                         error_log($calculatedTotal);
-
-    //                         if ($calculatedTotal != $validated['total_price']) {
-    //                             return response()->json([
-    //                                 'success' => false,
-    //                                 'message' => 'Total price mismatch'
-    //                             ], 400);
-    //                         }
-    //                         $qrToken = (string) Str::uuid();
-    //                         // ✅ create order
-    //                         $order = Order::create([
-    //                             'user_id' => auth()->id(),
-    //                             'total_price' => $validated['total_price'],
-
-    //                             'status' => 'pending', // default
-    //                             'qr_code' => $qrToken,
-    //                             'expires_at' => now()->addHours(2)
-    //                         ]);
-
-    //                         // ✅ insert items
-    //                         foreach ($validated['items'] as $item) {
-    //                             OrderItem::create([
-    //                                 'order_id' => $order->id,
-    //                                 'menu_id' => $item['id'],
-    //                                 'quantity' => $item['quantity'],
-    //                                 'price' => $item['price'],
-    //                             ]);
-    //                         }
-
-
-
-
-    //                         SystemLog::create([
-    //                             'user_id'     => $request->user()->id,
-    //                             'action'      => 'order created',
-    //                         ]);
-    //                         DB::commit();
-
-
-    //                         return response()->json([
-    //                             'success' => true,
-    //                             'message' => 'Order created successfully',
-    //                             'data' => $order->load('items.menu')
-    //                         ], 201);
-    //                     } catch (\Throwable $e) {
-
-    //                         DB::rollBack();
-
-    //                         return response()->json([
-    //                             'success' => false,
-    //                             'message' => 'Order creation failed',
-    //                             'error' => $e->getMessage()
-    //                         ], 500);
-    //                     }
-    // }
-
-
-    // public function store(Request $request)
-    // {
-    //     $validated = $request->validate([
-    //         'total_price' => 'required|numeric|min:0',
-    //         'items' => 'required|array|min:1',
-    //         'items.*.id' => 'required|exists:menus,id',
-    //         'items.*.quantity' => 'required|integer|min:1',
-    //         'items.*.price' => 'required|numeric|min:0',
-    //     ]);
-
-    //     DB::beginTransaction();
-
-    //     try {
-    //         // ✅ Optional frontend total verification
-    //         $calculatedTotal = collect($validated['items'])->sum(fn($item) => $item['quantity'] * $item['price']);
-    //         if ($calculatedTotal != $validated['total_price']) {
-    //             return response()->json([
-    //                 'success' => false,
-    //                 'message' => 'Total price mismatch'
-    //             ], 400);
-    //         }
-
-    //         // ✅ Generate QR token
-    //         // If your table has an 'id' primary key
-    //         $lastId = DB::table('orders')->max('qr_code') ?? 0;
-    //         $qrToken = str_pad($lastId, 5, '0', STR_PAD_LEFT);
-    //         // ✅ Generate QR image (PNG)
-    //         $qrImage = QrCode::format('png')->size(300)->useBackend('gd')->generate($qrToken);
-
-    //         // ✅ Save QR image to storage
-    //         // $qrImagePath = "public/qrcodes/{$qrToken}.png";
-
-    //         // Storage::put($qrImagePath, $qrImage);
-    //         // $qrImageUrl = asset("storage/qrcodes/{$qrToken}.png");
-    //         try {
-    //             $qrImage = QrCode::format('png')->size(300)->useBackend('gd')->generate($qrToken);
-    //             Storage::put("public/qrcodes/{$qrToken}.png", $qrImage);
-    //         } catch (\Throwable $e) {
-    //             dd($e->getMessage());
-    //         return response()->json(['error' => 'Failed to generate QR code',
-    //         "message"=> $e->getMessage()
-    //         ], 500);
-    //         }
-
-    //         // ✅ Create order
-    //         $order = Order::create([
-    //             'user_id' => auth()->id(),
-    //             'total_price' => $validated['total_price'],
-    //             'status' => 'pending',
-    //             'qr_code' => $qrToken,
-    //             'qr_image_url' => $qrImageUrl,
-    //             'expires_at' => now()->addHours(6),
-    //         ]);
-
-    //         // ✅ Insert order items
-    //         foreach ($validated['items'] as $item) {
-    //             OrderItem::create([
-    //                 'order_id' => $order->id,
-    //                 'menu_id' => $item['id'],
-    //                 'quantity' => $item['quantity'],
-    //                 'price' => $item['price'],
-    //             ]);
-    //         }
-
-    //         // ✅ Log QR issuance
-    //         QrLog::create([
-    //             'order_id' => $order->id,
-    //             'is_valid' => true,
-    //                         ]);
-
-    //         // ✅ System log
-    //         SystemLog::create([
-    //             'user_id' => auth()->id(),
-    //             'action' => 'order created',
-    //         ]);
-
-    //         DB::commit();
-
-    //         return response()->json([
-    //             'success' => true,
-    //             'message' => 'Order created successfully',
-    //             'data' => $order->load('items.menu'),
-    //             'qr_code' => $qrToken,
-    //             'qr_image' => $qrImageUrl
-    //         ], 201);
-    //     } catch (\Throwable $e) {
-    //         DB::rollBack();
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Order creation failed',
-    //             'error' => $e->getMessage()
-    //         ], 500);
-    //     }
-    // }
+ 
     public function store(Request $request)
     {
         $validated = $request->validate([

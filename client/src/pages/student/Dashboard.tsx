@@ -1,310 +1,197 @@
-// import { useData } from "@/context/DataContext";
-// import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-// import { Link } from "react-router-dom";
-// import { Button } from "@/components/ui/button";
-// import { ArrowRight, UtensilsCrossed, Clock, Wallet } from "lucide-react";
-
-// export default function StudentDashboard() {
-//   // const { currentUser, getStudent, orders } = useData();
-  
-//   // if (!currentUser?.id) return null;
-  
-//   // const student = getStudent(currentUser.id);
-//   // const myOrders = orders.filter(o => o.student_id === currentUser.id);
-//   // const pendingOrders = myOrders.filter(o => o.status === 'pending');
-//   // const recentOrders = myOrders.slice(0, 3);
-
-//   // if (!student) return <div>Loading...</div>;
-
-//   return (
-//     <div className="space-y-6 animate-in fade-in duration-500">
-
-
-
-//       <div className="flex justify-between items-center">
-//         <div>
-//             <h1 className="text-3xl font-serif font-bold text-gray-900">Welcome, {student.name.split(' ')[0]}</h1>
-//             <p className="text-gray-500">Here's what's happening with your meals today.</p>
-//         </div>
-//         <Link to="/student/order">
-//             <Button size="lg" className="bg-primary hover:bg-orange-600 shadow-lg hover:shadow-xl transition-all">
-//                 Order Meal <ArrowRight className="ml-2 h-4 w-4" />
-//             </Button>
-//         </Link>
-//       </div>
-
-//       <div className="grid md:grid-cols-3 gap-6">
-//         {/* Balance Card */}
-//         <Card className="border-l-4 border-l-accent shadow-soft hover:shadow-medium transition-shadow">
-//           <CardHeader className="pb-2">
-//             <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-//               <Wallet className="h-4 w-4 text-accent" /> Current Balance
-//             </CardTitle>
-//           </CardHeader>
-//           <CardContent>
-//             <div className="text-3xl font-bold text-primary">${student.balance.toFixed(2)}</div>
-//             <p className="text-xs text-muted-foreground mt-1">
-//                 {student.balance < 5 ? "Low balance - please top up soon." : "Ready for your next delicious meal!"}
-//             </p>
-//           </CardContent>
-//         </Card>
-
-//         {/* Active Orders Card */}
-//         <Card className="border-l-4 border-l-orange-500 shadow-soft hover:shadow-medium transition-shadow">
-//           <CardHeader className="pb-2">
-//             <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-//               <Clock className="h-4 w-4 text-orange-500" /> Pending Orders
-//             </CardTitle>
-//           </CardHeader>
-//           <CardContent>
-//             <div className="text-3xl font-bold text-gray-900">{pendingOrders.length}</div>
-//             <p className="text-xs text-muted-foreground mt-1">Orders waiting for approval</p>
-//           </CardContent>
-//         </Card>
-
-//         {/* Total Orders Card */}
-//         <Card className="border-l-4 border-l-secondary shadow-soft hover:shadow-medium transition-shadow">
-//           <CardHeader className="pb-2">
-//             <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-//               <UtensilsCrossed className="h-4 w-4 text-secondary" /> Total Meals
-//             </CardTitle>
-//           </CardHeader>
-//           <CardContent>
-//             <div className="text-3xl font-bold text-gray-900">{myOrders.length}</div>
-//             <p className="text-xs text-muted-foreground mt-1">Lifetime orders placed</p>
-//           </CardContent>
-//         </Card>
-//       </div>
-
-//       <div className="grid md:grid-cols-2 gap-6">
-//         {/* Recent Activity */}
-//         <Card className="shadow-sm">
-//             <CardHeader>
-//                 <CardTitle className="text-lg">Recent Orders</CardTitle>
-//             </CardHeader>
-//             <CardContent>
-//                 {recentOrders.length > 0 ? (
-//                     <div className="space-y-4">
-//                         {recentOrders.map(order => (
-//                             <div key={order.order_id} className="flex items-center justify-between border-b pb-2 last:border-0 last:pb-0">
-//                                 <div>
-//                                     <p className="font-medium text-sm">{order.items.map(i => i.name).join(", ")}</p>
-//                                     <p className="text-xs text-muted-foreground">{new Date(order.timestamp).toLocaleDateString()}</p>
-//                                 </div>
-//                                 <div className="flex flex-col items-end gap-1">
-//                                     <span className="font-bold text-sm">${order.total_price.toFixed(2)}</span>
-//                                     <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-full ${
-//                                         order.status === 'approved' ? 'bg-green-100 text-green-700' :
-//                                         order.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
-//                                         order.status === 'rejected' ? 'bg-red-100 text-red-700' :
-//                                         'bg-gray-100 text-gray-700'
-//                                     }`}>
-//                                         {order.status}
-//                                     </span>
-//                                 </div>
-//                             </div>
-//                         ))}
-//                     </div>
-//                 ) : (
-//                     <p className="text-muted-foreground text-sm">No recent orders found.</p>
-//                 )}
-//                 <div className="mt-4 pt-2 border-t text-center">
-//                     <Link to="/student/history">
-//                         <Button variant="link" size="sm" className="text-primary">View All History</Button>
-//                     </Link>
-//                 </div>
-//             </CardContent>
-//         </Card>
-
-//         {/* Quick Actions / Notifications */}
-//         <Card className="shadow-soft bg-orange-50 border-orange-100">
-//             <CardHeader>
-//                 <CardTitle className="text-lg text-primary">Notifications</CardTitle>
-//             </CardHeader>
-//             <CardContent>
-//                 <div className="space-y-3">
-//                     {student.balance < 10 && (
-//                         <div className="bg-white p-3 rounded-md border border-orange-100 flex gap-3 shadow-sm">
-//                             <div className="h-2 w-2 rounded-full bg-accent mt-2 shrink-0" />
-//                             <div>
-//                                 <h4 className="font-medium text-sm text-gray-900">Low Balance Warning</h4>
-//                                 <p className="text-xs text-gray-500">Your balance is running low. Please visit the admin office to top up.</p>
-//                             </div>
-//                         </div>
-//                     )}
-//                      <div className="bg-white p-3 rounded-md border border-orange-100 flex gap-3 shadow-sm">
-//                         <div className="h-2 w-2 rounded-full bg-secondary mt-2 shrink-0" />
-//                         <div>
-//                             <h4 className="font-medium text-sm text-gray-900">New Menu Items</h4>
-//                             <p className="text-xs text-gray-500">Check out the new specials added to the menu this week!</p>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </CardContent>
-//         </Card>
-//       </div>
-
-
-//     </div>
-//   );
-// }
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, UtensilsCrossed, Clock, Wallet } from "lucide-react";
+import { useAuth } from "@/feature/Context/authContext";
+import api from "@/apiService/api";
+import { useEffect, useState } from "react";
+const imageUrl = import.meta.env.VITE_IMAGE_API_URL;
 
 export default function StudentDashboard() {
-  // Dummy student data
-  const student = {
-    name: "John Doe",
-    balance: 12.5,
+  const [menuNumber, setMenuNumber] = useState(0);
+  const [Orders, setMyOrders] = useState<any[]>([]);
+  const [scanQR, setScanQR] = useState<string | null>(null);
+
+  const { user, balance } = useAuth();
+
+  useEffect(() => {
+    numberOfMenu();
+    myOrderList();
+  }, []);
+
+  const myOrderList = async () => {
+    try {
+      const response = await api.get(`/orders/${user?.id}`);
+      setMyOrders(response.data.data || []);
+    } catch (error: any) {
+      console.error("error fetching orders", error);
+    }
   };
 
-  // Dummy orders
-  const myOrders = [
-    {
-      order_id: "1",
-      student_id: "123",
-      items: [{ name: "Burger" }, { name: "Fries" }],
-      total_price: 8.99,
-      status: "approved",
-      timestamp: new Date().toISOString(),
-    },
-    {
-      order_id: "2",
-      student_id: "123",
-      items: [{ name: "Pizza" }],
-      total_price: 12.5,
-      status: "pending",
-      timestamp: new Date().toISOString(),
-    },
-    {
-      order_id: "3",
-      student_id: "123",
-      items: [{ name: "Salad" }],
-      total_price: 5.0,
-      status: "rejected",
-      timestamp: new Date().toISOString(),
-    },
-  ];
+  const numberOfMenu = async () => {
+    try {
+      const response = await api.get("/menu-count");
+      setMenuNumber(response.data.data || 0);
+    } catch (error: any) {
+      console.error("menu count error", error);
+    }
+  };
 
-  const pendingOrders = myOrders.filter((o) => o.status === "pending");
-  const recentOrders = myOrders.slice(0, 3);
+  const pendingOrders = Orders.filter((o) => o.status === "pending");
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
-      {/* Welcome Section */}
+      {/* Welcome */}
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-serif font-bold text-gray-900">
-            Welcome, {student.name.split(" ")[0]}
+            Welcome,
+            <span className="text-shadow-yellow-700 text-2xl">
+              {" "}
+              {user?.name?.split(" ")[0]}
+            </span>
           </h1>
           <p className="text-gray-500">
             Here's what's happening with your meals today.
           </p>
         </div>
+
         <Link to="/student/order">
-          <Button
-            size="lg"
-            className="bg-primary hover:bg-orange-600 shadow-lg hover:shadow-xl transition-all"
-          >
+          <Button size="lg" className="bg-primary hover:bg-orange-600">
             Order Meal <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </Link>
       </div>
 
-      {/* Stats Cards */}
+      {/* Stats */}
       <div className="grid md:grid-cols-3 gap-6">
-        <Card className="border-l-4 border-l-accent shadow-soft hover:shadow-medium transition-shadow">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-              <Wallet className="h-4 w-4 text-accent" /> Current Balance
+        <Card className="shadow-soft border-l-4 border-l-accent">
+          <CardHeader>
+            <CardTitle className="text-sm flex items-center gap-2">
+              <Wallet className="h-4 w-4" /> Current Balance
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-primary">
-              ${student.balance.toFixed(2)}
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">
-              {student.balance < 5
+            <div className="text-3xl font-bold text-primary">{balance} ETB</div>
+            <p className="text-xs text-destructive mt-1">
+              {(balance ?? 0) < 500
                 ? "Low balance - please top up soon."
-                : "Ready for your next delicious meal!"}
+                : "Ready for your next meal!"}
             </p>
           </CardContent>
         </Card>
 
-        <Card className="border-l-4 border-l-orange-500 shadow-soft hover:shadow-medium transition-shadow">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-              <Clock className="h-4 w-4 text-orange-500" /> Pending Orders
+        <Card className="shadow-soft border-l-4 border-l-orange-500">
+          <CardHeader>
+            <CardTitle className="text-sm flex items-center gap-2">
+              <Clock className="h-4 w-4" /> Pending Orders
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-gray-900">
-              {pendingOrders.length}
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">
-              Orders waiting for approval
+            <div className="text-3xl font-bold">{pendingOrders.length}</div>
+            <p className="text-xs text-muted-foreground">
+              Orders waiting approval
             </p>
           </CardContent>
         </Card>
 
-        <Card className="border-l-4 border-l-secondary shadow-soft hover:shadow-medium transition-shadow">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-              <UtensilsCrossed className="h-4 w-4 text-secondary" /> Total Meals
+        <Card className="shadow-soft border-l-4 border-l-secondary">
+          <CardHeader>
+            <CardTitle className="text-sm flex items-center gap-2">
+              <UtensilsCrossed className="h-4 w-4" /> Total Meals
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-gray-900">
-              {myOrders.length}
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">
-              Lifetime orders placed
+            <div className="text-3xl font-bold">{menuNumber}</div>
+            <p className="text-xs text-muted-foreground">
+              Lifetime meals ordered
             </p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Recent Orders & Notifications */}
+      {/* Orders */}
       <div className="grid md:grid-cols-2 gap-6">
-        <Card className="shadow-sm">
+        <Card className="shadow-soft">
           <CardHeader>
-            <CardTitle className="text-lg">Recent Orders</CardTitle>
+            <CardTitle>Recent Orders</CardTitle>
           </CardHeader>
+
           <CardContent>
-            {recentOrders.length > 0 ? (
+            {Orders.length > 0 ? (
               <div className="space-y-4">
-                {recentOrders.map((order) => (
+                {Orders.slice(0, 4).map((order) => (
                   <div
-                    key={order.order_id}
-                    className="flex items-center justify-between border-b pb-2 last:border-0 last:pb-0"
+                    key={order.id}
+                    className="flex justify-between border-b pb-3 last:border-0 last:pb-0"
                   >
-                    <div>
-                      <p className="font-medium text-sm">
-                        {order.items.map((i) => i.name).join(", ")}
+                    {/* LEFT */}
+                    <div className="space-y-1">
+                      <p className="text-xs text-muted-foreground font-mono">
+                        QR: {order.qr_code}
                       </p>
+
+                      <div className="text-sm space-y-1">
+                        {order.items?.length ? (
+                          order.items.map((item: any, i: number) => (
+                            <div key={i} className="flex justify-between gap-8">
+                              <span>
+                                {item.quantity}x {item.menu?.name}
+                              </span>
+                              <span className="font-semibold">
+                                $
+                                {(
+                                  Number(item.price) * Number(item.quantity)
+                                ).toFixed(2)}
+                              </span>
+                            </div>
+                          ))
+                        ) : (
+                          <span>Order</span>
+                        )}
+                      </div>
+
                       <p className="text-xs text-muted-foreground">
-                        {new Date(order.timestamp).toLocaleDateString()}
+                        {(order.items || []).reduce(
+                          (acc: number, i: any) =>
+                            acc + Number(i.quantity || 0),
+                          0,
+                        )}{" "}
+                        item(s)
+                      </p>
+
+                      <p className="text-xs text-muted-foreground">
+                        {new Date(order.created_at).toLocaleDateString()}
                       </p>
                     </div>
-                    <div className="flex flex-col items-end gap-1">
+
+                    {/* RIGHT */}
+                    <div className="flex flex-col items-end gap-2">
                       <span className="font-bold text-sm">
-                        ${order.total_price.toFixed(2)}
+                        ${Number(order.total_price).toFixed(2)}
                       </span>
+
                       <span
-                        className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-full ${
+                        className={`text-[10px] px-2 py-0.5 rounded-full uppercase font-bold ${
                           order.status === "approved"
                             ? "bg-green-100 text-green-700"
                             : order.status === "pending"
                               ? "bg-yellow-100 text-yellow-700"
-                              : order.status === "rejected"
-                                ? "bg-red-100 text-red-700"
-                                : "bg-gray-100 text-gray-700"
+                              : "bg-red-100 text-red-700"
                         }`}
                       >
                         {order.status}
                       </span>
+
+                      {/* Scan QR */}
+                      {order.qr_image_url && (
+                        <button
+                          className="text-[11px] bg-primary text-white px-2 py-1 rounded-md cursor-pointer"
+                          onClick={() => setScanQR(order.qr_image_url)}
+                        >
+                          Scan
+                        </button>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -314,9 +201,10 @@ export default function StudentDashboard() {
                 No recent orders found.
               </p>
             )}
+
             <div className="mt-4 pt-2 border-t text-center">
               <Link to="/student/history">
-                <Button variant="link" size="sm" className="text-primary">
+                <Button variant="link" size="sm">
                   View All History
                 </Button>
               </Link>
@@ -324,43 +212,47 @@ export default function StudentDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="shadow-soft bg-orange-50 border-orange-100">
+        {/* Notifications */}
+        <Card className="shadow-soft">
           <CardHeader>
-            <CardTitle className="text-lg text-primary">
-              Notifications
-            </CardTitle>
+            <CardTitle>Notifications</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3">
-              {student.balance < 10 && (
-                <div className="bg-white p-3 rounded-md border border-orange-100 flex gap-3 shadow-sm">
-                  <div className="h-2 w-2 rounded-full bg-accent mt-2 shrink-0" />
-                  <div>
-                    <h4 className="font-medium text-sm text-gray-900">
-                      Low Balance Warning
-                    </h4>
-                    <p className="text-xs text-gray-500">
-                      Your balance is running low. Please visit the admin office
-                      to top up.
-                    </p>
-                  </div>
-                </div>
-              )}
-              <div className="bg-white p-3 rounded-md border border-orange-100 flex gap-3 shadow-sm">
-                <div className="h-2 w-2 rounded-full bg-secondary mt-2 shrink-0" />
-                <div>
-                  <h4 className="font-medium text-sm text-gray-900">
-                    New Menu Items
-                  </h4>
-                  <p className="text-xs text-gray-500">
-                    Check out the new specials added to the menu this week!
-                  </p>
-                </div>
-              </div>
-            </div>
+            {(balance ?? 0) < 500 && (
+              <p className="text-sm text-red-500">
+                Low balance. Please top up.
+              </p>
+            )}
           </CardContent>
         </Card>
       </div>
+
+      {/* ✅ QR Modal Popup */}
+      {scanQR && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-xl text-center relative">
+            <button
+              onClick={() => setScanQR(null)}
+              className="absolute top-2 right-3 text-lg font-bold"
+            >
+              ✕
+            </button>
+
+            <h3 className="font-semibold mb-4">Scan QR Code</h3>
+
+            {/* Display backend-generated QR image */}
+            <img
+              src={`${imageUrl}${scanQR}`} // comes from order.qr_image_url
+              alt="QR Code"
+              className="w-48 h-48 mx-auto object-contain"
+            />
+
+            <p className="text-xs text-muted-foreground mt-3">
+              Show this code to receive your meal
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

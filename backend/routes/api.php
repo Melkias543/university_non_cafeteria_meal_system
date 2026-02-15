@@ -57,12 +57,15 @@ Route::middleware('auth:sanctum')->group(function () {
     */
     Route::get('/menus', [MenuController::class, 'index']);
     Route::get('/menus/{id}', [MenuController::class, 'show']);
+    Route::get('/menu-count', [MenuController::class, 'menu_count']);
 
     Route::put('/users/{user}', [UserController::class, 'update'])->middleware("role:admin");
     Route::get('/users/{user}', [UserController::class, 'show'])->middleware("role:admin");
     Route::get('/student-menu', [MenuController::class, 'menu_student']);
     Route::get('/user/balance', [WalletController::class, 'showByBalanceToStudent']);
     Route::post('/orders', [OrderController::class, 'store']);
+    Route::get('/orders/{user_id}', [OrderController::class, 'myOrder']);
+
     /*
     |---------------------------------------
     | Admin Only Routes

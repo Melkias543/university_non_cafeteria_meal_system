@@ -22,6 +22,6 @@ export const INITIAL_ORDERS: Order[] = [
     items: [{ menuItemId: 1, quantity: 2, name: "Pepperoni Pizza", price: 5.00 }], 
     total_price: 10.00, 
     status: "approved", 
-    timestamp: new Date(Date.now() - 86400000).toISOString() // Yesterday
+    timestamp: new Date(Date.now() - 86400000).toISOString()
   }
 ];
