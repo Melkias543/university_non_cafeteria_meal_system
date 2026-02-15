@@ -53,7 +53,7 @@ export default function StudentMenu() {
   };
 
 const {state, dispatch}= useCart()
-console.log('state from menu', state)
+// console.log('state from menu', state)
 
   // Dummy menu data
 

@@ -20,6 +20,16 @@ class MenuController extends Controller
      * 
      */
 
+public function menu_count(){
+$menus = Menu::where('is_available', true)->count() |0;
+        return response()->json([
+        'success' => true,
+        'data' => $menus
+    ]); 
+
+}
+
+
 public function menu_student(){
 
         $menus = Menu::where('is_available', true)
