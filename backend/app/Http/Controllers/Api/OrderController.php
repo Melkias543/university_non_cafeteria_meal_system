@@ -19,6 +19,15 @@ class OrderController extends Controller
      * Display a listing of the orders with items.
      */
 
+    public function getSystemLog()
+    {
+        $systemLog = SystemLog::with('user')->latest()->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $systemLog
+        ]);
+    }
 
 
     public function downloadQR($orderId)
