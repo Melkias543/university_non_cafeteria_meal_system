@@ -99,7 +99,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
               variant="ghost"
               size="icon"
               onClick={logout}
-              className="text-orange-100 hover:bg-orange-600 hover:text-white"
+              className="text-orange-100 hover:bg-orange-600 hover:text-white cursor-pointer"
             >
               <LogOut className="h-5 w-5" />
             </Button>
