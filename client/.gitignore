@@ -11,3 +11,8 @@ coverage/
 .vscode/
 *.log
 npm-debug.log*
+node_modules/.vite
+node_modules/
+dist/
+.vite/
+.env

@@ -154,6 +154,13 @@ Swal.fire({
       name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
+  const statusStyles: Record<string, string> = {
+    pending: "bg-yellow-100 text-yellow-800",
+    approved: "bg-green-100 text-green-800",
+    used: "bg-blue-100 text-blue-800",
+    default: "bg-gray-100 text-gray-700",
+  };
+
 
   // ================= ORDER CARD =================
   const OrderCard = ({ order }: any) => {
@@ -185,7 +192,13 @@ Swal.fire({
                   : ""}
               </p>
             </div>
-            <Badge>{order.status ?? "unknown"}</Badge>
+
+            {/* ✅ STATUS COLOR ONLY */}
+            <Badge
+              className={statusStyles[order.status] || statusStyles.default}
+            >
+              {order.status ?? "unknown"}
+            </Badge>
           </div>
 
           <div className="mt-4 space-y-1">
