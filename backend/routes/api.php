@@ -65,6 +65,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/balance', [WalletController::class, 'showByBalanceToStudent']);
     Route::post('/orders', [OrderController::class, 'store']);
     Route::get('/orders/{user_id}', [OrderController::class, 'myOrder']);
+    // routes/api.php
+    Route::get('/download-qrcode/{orderId}', [OrderController::class, 'downloadQR']);
 
     /*
     |---------------------------------------
@@ -80,7 +82,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/users/{user}', [UserController::class, 'destroy']);
         Route::patch('/users/status/{user}', [UserController::class, 'changeUserStatus']);
         Route::post('/wallet/top-up/{user}', [DepositController::class, 'topUp']);
-
+        Route::patch('/admin/scan', [OrderController::class, 'scan']);
+        Route::get('/admin/orders', [OrderController::class, 'index']);
     });
 
 

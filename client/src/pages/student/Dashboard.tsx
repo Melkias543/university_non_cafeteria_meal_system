@@ -5,15 +5,16 @@ import { ArrowRight, UtensilsCrossed, Clock, Wallet } from "lucide-react";
 import { useAuth } from "@/feature/Context/authContext";
 import api from "@/apiService/api";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import Swal from "sweetalert2";
 const imageUrl = import.meta.env.VITE_IMAGE_API_URL;
 
 export default function StudentDashboard() {
   const [menuNumber, setMenuNumber] = useState(0);
   const [Orders, setMyOrders] = useState<any[]>([]);
   const [scanQR, setScanQR] = useState<string | null>(null);
-
   const { user, balance } = useAuth();
-
+const [scanId,setSCanId]= useState()
   useEffect(() => {
     numberOfMenu();
     myOrderList();
@@ -38,6 +39,46 @@ export default function StudentDashboard() {
   };
 
   const pendingOrders = Orders.filter((o) => o.status === "pending");
+
+const handleDownloadQR = async () => {
+  if (!scanId) return;
+
+  try {
+    // Request the SVG from backend
+    const response = await api.get(`/download-qrcode/${scanId}`, {
+      responseType: "text", // SVG is text/XML
+    });
+
+    // Create a blob of type SVG
+    const blob = new Blob([response.data], { type: "image/svg+xml" });
+
+    // Create temporary URL
+    const url = window.URL.createObjectURL(blob);
+
+    // Create link and trigger download
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `${scanId}.svg`); // proper SVG filename
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    // Cleanup
+    window.URL.revokeObjectURL(url);
+
+    console.log("QR code (SVG) downloaded successfully");
+  } catch (err: any) {
+    console.error("Download error:", err);
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Failed to download QR code!",
+    });
+  }
+};
+
+ 
+
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
@@ -187,7 +228,13 @@ export default function StudentDashboard() {
                       {order.qr_image_url && (
                         <button
                           className="text-[11px] bg-primary text-white px-2 py-1 rounded-md cursor-pointer"
-                          onClick={() => setScanQR(order.qr_image_url)}
+                          onClick={() => 
+                           {
+                             (setScanQR(order.qr_image_url),
+                               setSCanId(order.qr_code));
+                           }
+                          
+                          }
                         >
                           Scan
                         </button>
@@ -240,16 +287,23 @@ export default function StudentDashboard() {
 
             <h3 className="font-semibold mb-4">Scan QR Code</h3>
 
-            {/* Display backend-generated QR image */}
-            <img
-              src={`${imageUrl}${scanQR}`} // comes from order.qr_image_url
-              alt="QR Code"
-              className="w-48 h-48 mx-auto object-contain"
-            />
+            {/* Downloadable QR image */}
+            {/* <a
+              href={`${imageUrl}${scanQR}`}
+              download={`QR_${scanQR}.png`} // optional: set a filename
+              className="inline-block"
+            > */}
+              <img
+                src={`${imageUrl}${scanQR}`} // comes from order.qr_image_url
+                alt="QR Code"
+                className="w-48 h-48 mx-auto object-contain cursor-pointer"
+                title="Click to download"
+              />
+            {/* </a> */}
 
-            <p className="text-xs text-muted-foreground mt-3">
-              Show this code to receive your meal
-            </p>
+            <Button onClick={handleDownloadQR} className="mt-4 w-full cursor-pointer">
+              Download QR Code
+            </Button>
           </div>
         </div>
       )}

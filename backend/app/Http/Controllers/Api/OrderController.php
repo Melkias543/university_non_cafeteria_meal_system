@@ -8,7 +8,7 @@ use App\Models\OrderItem;
 use App\Models\SystemLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+// use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\QrLog;
@@ -19,7 +19,90 @@ class OrderController extends Controller
      * Display a listing of the orders with items.
      */
 
-public function myOrder($user_id){
+
+
+    public function downloadQR($orderId)
+    {
+
+        // Find order by QR code
+        $order = Order::where('qr_code', $orderId)->firstOrFail();
+
+        // Extract filename from URL if needed
+        $filename = $order->qr_code_filename ?? basename($order->qr_image_url);
+
+        // Full path to file
+        $path = public_path('storage/qrcodes/' . $filename);
+
+        if (!file_exists($path)) {
+            return response()->json(['message' => 'QR code file not found'], 404);
+        }
+
+        return response()->download($path, $filename);
+    }
+
+
+
+
+
+
+    public function scan(Request $request)
+    {
+        $request->validate([
+            'qr_code' => 'required'
+        ]);
+
+        $order = Order::where('qr_code', $request->qr_code)->first();
+
+        if (!$order) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid QR Code'
+            ], 404);
+        }
+
+        // Already used?
+        if ($order->status === 'used') {
+            return response()->json([
+                'success' => false,
+                'message' => 'This Order is already used'
+            ], 400);
+        }
+
+        // Expired?
+        if ($order->status === 'expired') {
+            return response()->json([
+                'success' => false,
+                'message' => 'QR expired'
+            ], 400);
+        }
+
+        // ✅ Mark as completed
+        $order->update([
+            'status' => 'used',
+            'used_at' => now(),
+        ]);
+
+        SystemLog::create([
+            'user_id' => auth()->id(),
+            'action' => 'order used',
+        ]);
+
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Order completed successfully',
+            'order' => $order
+        ]);
+    }
+
+
+
+
+
+
+
+
+    public function myOrder($user_id){
     $orders = Order::with('items.menu')
     ->where('user_id', $user_id)
     ->latest()
@@ -34,7 +117,7 @@ public function myOrder($user_id){
 
     public function index()
     {
-        $orders = Order::with('items.menu')->latest()->get();
+        $orders = Order::with(['user', 'items.menu'])->latest()->get();
 
         return response()->json([
             'success' => true,
