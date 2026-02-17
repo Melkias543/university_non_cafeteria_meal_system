@@ -84,6 +84,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/wallet/top-up/{user}', [DepositController::class, 'topUp']);
         Route::patch('/admin/scan', [OrderController::class, 'scan']);
         Route::get('/admin/orders', [OrderController::class, 'index']);
+        Route::get('/admin/system_log', [OrderController::class, 'getSystemLog']);
     });
 
 
