@@ -40,6 +40,7 @@ export default function AdminOrders() {
   const getOrders = async () => {
     try {
       const res = await api.get("/admin/orders");
+      console.log(res.data.data);
       setOrders(res.data.data ?? []);
     } catch (err) {
       console.error(err);

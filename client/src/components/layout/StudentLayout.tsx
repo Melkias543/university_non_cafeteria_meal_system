@@ -7,7 +7,8 @@ import {
   ShoppingBag, 
   History, 
   LogOut, 
-  UserCircle 
+  UserCircle, 
+  List
 } from "lucide-react";
 // import { CardTitle } from "../ui//card";
 
@@ -66,6 +67,12 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
               />
               <NavItem href="/student/order" icon={ShoppingBag} label="Order" />
               <NavItem href="/student/history" icon={History} label="History" />
+              <NavItem
+                href="/student/order-queues"
+                icon={List}
+                label="Order Queue"
+              />
+              {/*  Position */}
             </nav>
           </div>
 
@@ -81,7 +88,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
                 <span className="text-sm font-mono font-bold text-gray-700">
                   Your Total Balance:{" "}
                   <span className="text-green-600 text-lg font-extrabold bg-green-50 px-3 py-1 rounded-lg shadow-md border border-green-200">
-                    💰 ${balance ?? 0}
+                    💰 {balance ?? 0} ETB
                   </span>
                 </span>
               </div>

@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-[#FF4F00] text-white font-sans selection:bg-white selection:text-[#FF4F00]">
-      {/* High-Contrast Header */}
+      {/* Header */}
       <nav className="sticky top-0 z-50 bg-[#121212] border-b border-white/5 px-8 py-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
           <div className="bg-[#FF4F00] p-1.5 rounded-md">
@@ -38,16 +38,15 @@ export default function LandingPage() {
           </div>
 
           <Link to="/login">
-          <button className="bg-white text-black px-4 py-2 rounded-sm font-black text-[10px] uppercase tracking-tighter hover:bg-[#FF4F00] hover:text-white transition-all">
-            Enter System
-          </button>
-
+            <button className="bg-white text-black px-5 py-2 rounded-md font-black text-[10px] uppercase tracking-tighter hover:bg-[#FF4F00] hover:text-white transition-all">
+              Enter System
+            </button>
           </Link>
         </div>
       </nav>
 
-      {/* Hero Header with Grid Pattern */}
-      <header className="relative px-8 py-24 max-w-7xl mx-auto overflow-hidden">
+      {/* Hero Section */}
+      <header className="relative px-8 py-32 max-w-7xl mx-auto overflow-hidden">
         <div className="absolute inset-0 opacity-10 [mask-image:linear-gradient(to_bottom,white,transparent)]">
           <svg width="100%" height="100%">
             <defs>
@@ -69,28 +68,56 @@ export default function LandingPage() {
           </svg>
         </div>
 
-        <div className="relative z-10">
+        <div className="relative z-10 text-center md:text-left">
           <div className="inline-block bg-black text-white px-3 py-1 mb-6 text-[10px] font-bold uppercase tracking-[0.3em]">
             Digital Meal Protocol v1.0
           </div>
-          <h1 className="text-7xl md:text-[10rem] font-black leading-[0.75] tracking-[ -0.05em] mb-8">
-            ORDER.
-            <br />
-            SCAN.
-            <br />
-            EAT.
-          </h1>
-          <p className="text-xl md:text-2xl font-medium max-w-xl leading-snug">
-            A high-performance digital ledger for university dining. Removing
-            the friction between the student and the kitchen.
+
+          {/* Hero Layout */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16">
+            {/* Hero Text */}
+            <div className="flex-1 max-w-md md:max-w-lg">
+              <h1 className="text-5xl md:text-[6rem] font-black leading-tight md:leading-[1.1] tracking-tight flex flex-col gap-4">
+                <span className="block text-white">ORDER.</span>
+                <span className="block text-[#FFEDCC]">SCAN.</span>
+                <span className="block text-white">EAT.</span>
+              </h1>
+
+              <p className="mt-6 text-lg md:text-xl font-medium max-w-md text-white/90 leading-relaxed">
+                A high-performance digital ledger for university dining.
+                Streamlining the experience between students and kitchens while
+                keeping everything secure and fast.
+              </p>
+
+              <Link to="/login">
+                <button className="mt-8 bg-white text-black px-6 py-3 rounded-md font-black text-sm uppercase tracking-tighter hover:bg-[#FF4F00] hover:text-white transition-all">
+                  Enter System
+                </button>
+              </Link>
+            </div>
+
+            {/* Food Image */}
+            <div className="flex-1 max-w-md md:max-w-lg flex justify-center">
+              <img
+                src="https://images.pexels.com/photos/19345991/pexels-photo-19345991.jpeg"
+                alt="Delicious food"
+                className="rounded-3xl shadow-2xl max-w-full animate-float"
+              />
+            </div>
+          </div>
+
+          <p className="text-lg md:text-2xl font-medium max-w-xl mx-auto md:mx-0 leading-relaxed mt-8">
+            A high-performance digital ledger for university dining.
+            Streamlining the experience between students and kitchens while
+            keeping everything secure and fast.
           </p>
         </div>
       </header>
 
-      {/* Modern Grid Services */}
+      {/* Services Section */}
       <section className="px-8 pb-32 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
-          {/* QR Service Card */}
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
+          {/* QR Verification */}
           <div className="md:col-span-4 bg-[#121212] p-10 rounded-3xl flex flex-col justify-between min-h-[400px] group transition-all hover:bg-zinc-900 border border-white/5 shadow-2xl">
             <div className="flex justify-between items-start">
               <QrCode
@@ -114,7 +141,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Balance Card */}
+          {/* Real-time Balance */}
           <div className="md:col-span-2 bg-white text-black p-10 rounded-3xl flex flex-col justify-between shadow-2xl">
             <CreditCard size={48} strokeWidth={1.5} />
             <div>
@@ -127,15 +154,15 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Admin Tools Card */}
+          {/* Admin Tools */}
           <div className="md:col-span-2 bg-[#FF6A28] p-10 rounded-3xl border border-white/20 flex flex-col justify-between group">
             <Zap size={40} fill="white" />
-            <h3 className="text-2xl font-black uppercase tracking-tighter leading-none">
+            <h3 className="text-2xl font-black uppercase tracking-tighter leading-none mt-4">
               Admin Fast-Track Scan
             </h3>
           </div>
 
-          {/* Infrastructure Card */}
+          {/* Kitchen Infrastructure */}
           <div className="md:col-span-4 bg-zinc-100 text-black p-10 rounded-3xl flex items-center gap-8 group overflow-hidden relative">
             <div className="relative z-10">
               <h3 className="text-3xl font-black uppercase tracking-tighter mb-2">
@@ -154,11 +181,11 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Architectural Goals */}
+      {/* Features Section */}
       <section className="bg-black py-24 px-8 border-t border-white/10">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-16">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 text-center md:text-left">
           <div className="space-y-4">
-            <Shield className="text-[#FF4F00]" size={32} />
+            <Shield className="text-[#FF4F00] mx-auto md:mx-0" size={32} />
             <h4 className="text-xl font-bold uppercase tracking-widest">
               Security First
             </h4>
@@ -168,7 +195,7 @@ export default function LandingPage() {
             </p>
           </div>
           <div className="space-y-4">
-            <LayoutGrid size={32} className="text-[#FF4F00]" />
+            <LayoutGrid size={32} className="text-[#FF4F00] mx-auto md:mx-0" />
             <h4 className="text-xl font-bold uppercase tracking-widest">
               Centralized Hub
             </h4>
@@ -178,7 +205,7 @@ export default function LandingPage() {
             </p>
           </div>
           <div className="space-y-4">
-            <Zap size={32} className="text-[#FF4F00]" />
+            <Zap size={32} className="text-[#FF4F00] mx-auto md:mx-0" />
             <h4 className="text-xl font-bold uppercase tracking-widest">
               Zero Latency
             </h4>
@@ -190,7 +217,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Minimal Footer */}
+      {/* Footer */}
       <footer className="bg-black p-8 text-center border-t border-white/5">
         <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.5em]">
           University Digital Meal System // Terminal Access 2026

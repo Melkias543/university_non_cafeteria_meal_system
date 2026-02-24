@@ -67,6 +67,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/orders/{user_id}', [OrderController::class, 'myOrder']);
     // routes/api.php
     Route::get('/download-qrcode/{orderId}', [OrderController::class, 'downloadQR']);
+    Route::get('/orders/order-queues', [OrderController::class, 'Order_Queues']);
 
     /*
     |---------------------------------------
