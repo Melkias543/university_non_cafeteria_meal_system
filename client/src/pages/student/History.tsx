@@ -25,7 +25,7 @@ export default function StudentHistory() {
   const fetchOrders = async () => {
     try {
       const response = await api.get(`/orders/${user?.id}`);
-      console.log("Fetched Orders:", response.data.data);
+      // console.log("Fetched Orders:", response.data.data);
       setOrders(response.data.data || []);
     } catch (error: any) {
       console.error("Error fetching orders:", error.response);

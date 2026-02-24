@@ -8,7 +8,7 @@ import {
   Globe,
   CheckCircle2,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { LoginInput, loginSchema } from "@/types/validadion";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,7 +20,7 @@ const Login = () => {
   const [error, setEror] = useState<string | null>(null);
 
 const { login } = useAuth(); // Use the auth context if needed u
-
+const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -33,36 +33,53 @@ const { login } = useAuth(); // Use the auth context if needed u
     },
   });
 
-  const onSubmit = async (data: LoginInput) => {
-    try {
-      const response = await api.post("/login", data);
-    
-const user = {
-  id: response.data.data.id,
-  name: response.data.data.full_name,
-  email: response.data.data.email,
-  role: response.data.data.roles[0].name, // assuming the first role is the primary one
-};
-  // console.log(
-  //   "token:",
-  //   response.data.access_token,
-  //   "user:",
-  //   user,
-  // );
-  Swal.fire({
-    title: "Login Successful",
-    text: response.data.message || "You have successfully logged in.",
-    icon: "success",
-  });
-  setEror(null); // Clear any previous errors
-  login(response.data.access_token, user);
-    } catch (error: any) {
-      console.error("Login error:", error);
-      const errorMessage =
-        error.response?.data?.message || "An unexpected error occurred.";
-      setEror(errorMessage);
-    }
-  };
+ const onSubmit = async (data: LoginInput) => {
+   try {
+     const response = await api.post("/login", data);
+     const apiData = response.data.data;
+
+     const user = {
+       id: apiData.id,
+       name: apiData.full_name,
+       email: apiData.email,
+       role: apiData.roles[0].name,
+     };
+
+     // 1. UPDATE STATE FIRST (Crucial)
+     // This ensures that when the route changes, the Auth Guard sees the user
+      login(response.data.access_token, user);
+
+     // 2. SHOW SUCCESS MESSAGE
+     Swal.fire({
+       title: "Login Successful",
+       text: response.data.message || "You have successfully logged in.",
+       icon: "success",
+       timer: 1500, // Optional: auto-close so user gets to the dashboard faster
+       showConfirmButton: false,
+     });
+
+     // 3. NAVIGATE BASED ON ROLE
+     // Using a simple check or a mapping object
+     const role = user.role.toLowerCase();
+     if (role === "admin") {
+       navigate("/admin/dashboard", { replace: true });
+     } else {
+       navigate("/student/dashboard", { replace: true });
+     }
+
+     setEror(null);
+   } catch (error: any) {
+     const errorMessage =
+       error.response?.data?.message || "An unexpected error occurred.";
+     setEror(errorMessage);
+
+     Swal.fire({
+       title: "Login Failed",
+       text: errorMessage,
+       icon: "error",
+     });
+   }
+ };
 
   return (
     <div className="min-h-screen bg-[#F6863E] flex items-center justify-center p-4 md:p-8 relative overflow-hidden font-sans">

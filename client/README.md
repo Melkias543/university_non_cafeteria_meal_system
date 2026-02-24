@@ -5,6 +5,7 @@ A modern, professional frontend application for managing university meal orders,
 ## 🚀 Features
 
 ### Student Portal
+
 - **Dashboard**: View balance, pending orders, and recent activity
 - **Menu**: Browse available meals with images and descriptions
 - **Order**: Place meal orders with real-time balance checking
@@ -12,6 +13,7 @@ A modern, professional frontend application for managing university meal orders,
 - **QR Code**: Generate QR codes for order verification
 
 ### Admin Portal
+
 - **Dashboard**: Overview of revenue, orders, and system metrics
 - **Students**: Manage student accounts and balances
 - **Menu Management**: Add, edit, and remove menu items
@@ -56,6 +58,7 @@ client/
 ## 🎨 Design System
 
 ### Color Palette
+
 - **Primary**: Deep Blue (#1E40AF) - Professional, trustworthy
 - **Accent**: Amber (#FBBF24) - Attention, highlights
 - **Success**: Green (#10B981) - Approved actions
@@ -63,6 +66,7 @@ client/
 - **Background**: Light Gray (#F9FAFB) - Clean, modern
 
 ### Typography
+
 - **Font Family**: Inter (sans-serif), Merriweather (serif)
 - **Headings**: Serif font for elegance
 - **Body**: Sans-serif for readability
@@ -70,17 +74,20 @@ client/
 ## 🚦 Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
-- npm or yarn
+
+- Node.js 18+
+- npm
 
 ### Installation
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Start development server:
+
 ```bash
 npm run dev
 ```
@@ -107,16 +114,19 @@ The built files will be in the `dist/` directory.
 The application runs with dummy data for demonstration purposes:
 
 ### Student Login
+
 - Select any student from the dropdown
 - Each student has a pre-loaded balance and order history
 
 ### Admin Login
+
 - Click "Access Admin Panel"
 - Full access to all management features
 
 ## 🔐 Features in Detail
 
 ### Student Features
+
 - Real-time balance tracking
 - Visual menu with categories
 - Shopping cart functionality
@@ -125,6 +135,7 @@ The application runs with dummy data for demonstration purposes:
 - Order history with filters
 
 ### Admin Features
+
 - Student account management
 - Balance top-up system
 - Menu item CRUD operations
@@ -151,6 +162,7 @@ The application runs with dummy data for demonstration purposes:
 ## 🔄 State Management
 
 All data is managed through React Context (`DataContext`):
+
 - Students array
 - Menu items array
 - Orders array
@@ -175,6 +187,7 @@ MIT License - feel free to use this project for learning or production.
 ## 👨‍💻 Development
 
 This is a frontend-only application with no backend dependencies. All data is simulated using in-memory state management, making it perfect for:
+
 - Prototyping
 - UI/UX demonstrations
 - Frontend development practice
