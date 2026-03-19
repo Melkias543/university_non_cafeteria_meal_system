@@ -140,7 +140,10 @@ console.error(error.response?.data?.message || "An error occurred");
 Swal.fire({
   icon: "error",
   title: "verifying Qr code is fail.",
-  text: error?.response?.data?.message ?? error.message ?? "Something went wrong",
+  text:
+    error?.response?.data?.message ?? error.message ?? "Something went wrong",
+  timer: 2000,
+  showConfirmButton: false,
 });
 
     }

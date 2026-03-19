@@ -194,7 +194,7 @@ console.log("from api",res.data.message)
                     </span>
                   </span>
                 </div>
-                <span className="font-bold text-primary">${item.price}</span>
+                <span className="font-bold text-primary">${item.price} ETB</span>
               </div>
               <p className="text-sm text-gray-500 line-clamp-2">
                 {item.description}
