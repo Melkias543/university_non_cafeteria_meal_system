@@ -136,7 +136,7 @@ const Register = () => {
                       <input
                         {...register("email")}
                         className="w-full bg-white/80 border border-zinc-200 rounded-2xl py-4 pl-12 pr-4 text-zinc-900 text-sm focus:outline-none focus:border-[#F6863E] focus:ring-4 focus:ring-[#F6863E]/10 transition-all placeholder:text-zinc-400"
-                        placeholder="name@university.edu"
+                        placeholder="name@gmail.com"
                       />
                     </div>
                   </div>
@@ -211,23 +211,23 @@ const Register = () => {
                     <Loader2 size={18} className="animate-spin" />
                   ) : (
                     <>
-                      Complete Registration <ChevronRight size={18} />
+                      Register <ChevronRight size={18} />
                     </>
                   )}
                 </button>
               </form>
               <button
                 type="submit"
-                disabled={isSubmitting}
+                // disabled={isSubmitting}
                 className="w-full bg-[#F6863E] text-white font-bold uppercase tracking-widest text-xs py-5 rounded-2xl flex items-center justify-center gap-3 shadow-lg shadow-[#F6863E]/30 hover:shadow-[#F6863E]/50 hover:-translate-y-0.5 transition-all duration-300 mt-6 active:scale-[0.98] disabled:opacity-70 cursor-pointer"
               >
-                {isSubmitting ? (
+                {/* {isSubmitting ? (
                   <Loader2 size={18} className="animate-spin" />
-                ) : (
+                ) : ( */}
                   <>
                   Continue whith Google <ChevronRight size={18} />
                   </>
-                )}
+                {/* )} */}
               </button>
               <div className="mt-10 text-center">
                 <p className="text-zinc-500 text-xs font-bold uppercase tracking-wider">

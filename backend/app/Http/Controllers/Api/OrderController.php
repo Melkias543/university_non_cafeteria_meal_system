@@ -5,19 +5,37 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\QrLog;
 use App\Models\SystemLog;
+use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use App\Models\QrLog;
-
 class OrderController extends Controller
 {
     /**
      * Display a listing of the orders with items.
      */
+
+
+    public function Order_Queues()
+    {
+        $query = Order::whereIn('status', ['pending', 'used'])->latest();
+        // $query = Order::latest()->get();
+        $allCount = $query->count();
+        $orderQueues = $query->get();
+
+        return response()->json([
+            'success' => true,
+            'total_count' => $allCount,
+            'data' => $orderQueues
+        ]);
+    }
+
+
 
     public function getSystemLog()
     {
@@ -112,6 +130,7 @@ class OrderController extends Controller
 
 
     public function myOrder($user_id){
+        
     $orders = Order::with('items.menu')
     ->where('user_id', $user_id)
     ->latest()
@@ -217,6 +236,7 @@ class OrderController extends Controller
             }
 
             // 6️⃣ Logging
+            Transaction::create(['user_id' => auth()->id(),'order_id'=>$order->id, 'amount' => $calculatedTotal, 'balance_after'=> $wallet_balance,'type' => 'deduction']);
             QrLog::create(['order_id' => $order->id, 'is_valid' => true]);
             SystemLog::create(['user_id' => auth()->id(), 'action' => 'order created']);
 

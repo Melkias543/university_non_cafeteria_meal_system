@@ -23,33 +23,10 @@ import {
   StudentPages,
   AdminPages,
 } from "./Routes/protectedRoutes";
+import OrderQueue from "./pages/student/OrderQueue";
 
 function Router() {
   return (
-    //   <Routes>
-    //     <Route path="/" element={<LandingPage />} />
-    //     <Route path="/login" element={<Login />} />
-    //     <Route path="/register" element={<Register />} />
-
-    //     Student Routes
-    //     <Route element={<ProtectedRoute/><StudentPages />}>
-    //       <Route path="/student/dashboard" element={<StudentLayout><StudentDashboard /></StudentLayout>} />
-    //       <Route path="/student/menu" element={<StudentLayout><StudentMenu /></StudentLayout>} />
-    //       <Route path="/student/order" element={<StudentLayout><StudentOrder /></StudentLayout>} />
-    //       <Route path="/student/history" element={<StudentLayout><StudentHistory /></StudentLayout>} />
-    //     </Route>
-
-    //     {/* Admin Routes */}
-    //   <Route element={<ProtectedRoute/><AdminPages />}>
-    // <Route path="/admin/dashboard" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
-    // <Route path="/admin/students" element={<AdminLayout><AdminStudents /></AdminLayout>} />
-    // <Route path="/admin/menu" element={<AdminLayout><AdminMenu /></AdminLayout>} />
-    // <Route path="/admin/orders" element={<AdminLayout><AdminOrders /></AdminLayout>} />
-    // <Route path="/admin/reports" element={<AdminLayout><AdminReports /></AdminLayout>} />
-
-    //     <Route path="*" element={<NotFound />} />
-    //   </Routes>
-
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
@@ -66,6 +43,15 @@ function Router() {
               </StudentLayout>
             }
           />
+          <Route
+            path="/student/order-queues"
+            element={
+              <StudentLayout>
+                <OrderQueue />
+              </StudentLayout>
+            }
+          />
+          {/* /student/order-queues */}
           <Route
             path="/student/menu"
             element={

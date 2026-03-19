@@ -40,6 +40,7 @@ export default function AdminOrders() {
   const getOrders = async () => {
     try {
       const res = await api.get("/admin/orders");
+      console.log(res.data.data);
       setOrders(res.data.data ?? []);
     } catch (err) {
       console.error(err);
@@ -139,7 +140,10 @@ console.error(error.response?.data?.message || "An error occurred");
 Swal.fire({
   icon: "error",
   title: "verifying Qr code is fail.",
-  text: error?.response?.data?.message ?? error.message ?? "Something went wrong",
+  text:
+    error?.response?.data?.message ?? error.message ?? "Something went wrong",
+  timer: 2000,
+  showConfirmButton: false,
 });
 
     }

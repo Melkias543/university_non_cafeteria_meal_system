@@ -54,8 +54,7 @@ import { XCircle, Clock } from "lucide-react";
 import Swal from "sweetalert2";
 
 export default function AdminStudents() {
-  const { students, addStudent, updateStudentBalance, deleteStudent } =
-    useData();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStudent, setSelectedStudent] = useState<String>("");
   const [balanceAmount, setBalanceAmount] = useState<number>(1);
@@ -265,16 +264,16 @@ export default function AdminStudents() {
                 filteredStudents.map((student) => (
                   <TableRow key={student.id}>
                     <TableCell className="font-medium">
-                      {student.full_name}
+                      {student?.full_name}
                     </TableCell>
                     <TableCell className="font-medium">
                       {student.full_name}
                     </TableCell>
                     <TableCell className="font-mono text-xs">
-                      {student.profile.department}
+                      {student?.profile?.department}
                     </TableCell>
                     <TableCell className="text-muted-foreground">
-                      {student.email}
+                      {student?.email}
                     </TableCell>
                     <TableCell>
                       <span>{student?.profile?.phone}</span>
@@ -361,14 +360,14 @@ export default function AdminStudents() {
                         variant="ghost"
                         size="icon"
                         className="text-red-500 hover:text-red-700 hover:cursor-pointer hover:bg-red-50"
-                        onClick={() => deleteStudent(student.id)}
+                        // onClick={() => deleteStudent(student.id)}
                       >
                         <View className="h-4 w-4" />
                       </Button>
 
                       <Button
                         className="hover:cursor-pointer"
-                        onClick={() => SetEditStudent(student)}
+                        // onClick={() => SetEditStudent(student)}
                       >
                         <Edit className="h-4 w-4" />
                       </Button>
