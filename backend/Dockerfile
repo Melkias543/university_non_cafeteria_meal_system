@@ -24,5 +24,7 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 
 # Render uses the PORT env var; Apache defaults to 80, but Render maps it automatically.
 EXPOSE 80
+# Replace your current CMD with this:
+CMD php artisan migrate --force && apache2-foreground
 
 # No need for 'php artisan serve', Apache starts by default in this image
