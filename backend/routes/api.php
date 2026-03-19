@@ -13,10 +13,13 @@ use GuzzleHttp\Middleware;
 use Symfony\Component\Routing\Route as RoutingRoute;
 
 /*
+
 |--------------------------------------------------------------------------
 | Public Routes
-|--------------------------------------------------------------------------
+|-------------------------------
+-------------------------------------------
 */
+
 use Illuminate\Support\Facades\DB;
 
 Route::get('/list-my-tables', function () {
