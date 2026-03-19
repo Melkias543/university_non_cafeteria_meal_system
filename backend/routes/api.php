@@ -13,10 +13,13 @@ use GuzzleHttp\Middleware;
 use Symfony\Component\Routing\Route as RoutingRoute;
 
 /*
+
 |--------------------------------------------------------------------------
 | Public Routes
-|--------------------------------------------------------------------------
+|-------------------------------
+-------------------------------------------
 */
+
 Route::get('/ping', function () {
     return response()->json(['status' => 'OK'], 200);
 });
