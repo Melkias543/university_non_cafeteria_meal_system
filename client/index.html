@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
@@ -10,7 +13,7 @@
     content="meal system, university cafeteria, contract management, full stack app, React, Laravel" />
   <meta name="author" content="Melkias Teshoma" />
 
-  <!-- Open Graph (Facebook, LinkedIn, etc.) -->
+  <!-- Open Graph -->
   <meta property="og:title" content="University Digital Meal Management System" />
   <meta property="og:description"
     content="A full-stack web application for managing university cafeteria contracts and digital meal services." />
@@ -26,7 +29,7 @@
   <meta name="twitter:image" content="/preview.png" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="./public/favicon_dark.png" />
+  <link rel="icon" type="image/png" href="/favicon_dark.png" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,3 +38,10 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&display=swap"
     rel="stylesheet">
 </head>
+
+<body>
+  <div id="root"></div> <!-- React attaches here -->
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
