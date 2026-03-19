@@ -26,6 +26,5 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 EXPOSE 80
 # Replace your current CMD with this:
 # Add this to your Dockerfile temporarily
-# Add this to your Dockerfile temporarily
 CMD php artisan db:wipe --force && php artisan migrate --force && apache2-foreground
 # No need for 'php artisan serve', Apache starts by default in this image
