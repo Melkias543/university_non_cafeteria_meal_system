@@ -20,6 +20,20 @@ use Symfony\Component\Routing\Route as RoutingRoute;
 -------------------------------------------
 */
 
+use Illuminate\Support\Facades\DB;
+
+Route::get('/list-my-tables', function () {
+    try {
+        $tables = DB::select('SHOW TABLES');
+        return response()->json([
+            'database' => 'Connected to Aiven: ' . DB::getDatabaseName(),
+            'total_tables' => count($tables),
+            'tables' => $tables
+        ]);
+    } catch (\Exception $e) {
+        return "Connection Error: " . $e->getMessage();
+    }
+});
 Route::get('/ping', function () {
     return response()->json(['status' => 'OK'], 200);
 });
