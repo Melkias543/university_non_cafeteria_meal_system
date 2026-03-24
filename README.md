@@ -1,6 +1,6 @@
 # 🍽️ University Non-Cafeteria Meal System
 
-<img src="client/public/favicon.png" alt="UniMeal Logo" width="80" />
+<img src="client/public/favicon_dark.png" alt="UniMeal Logo" width="80" />
 
 ### 🚀 Digital Meal Ordering & QR Verification Platform for Universities
 
