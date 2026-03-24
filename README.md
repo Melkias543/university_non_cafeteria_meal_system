@@ -206,9 +206,10 @@ client/    → React Frontend
 
 ---
 
-## 📜 License
 
-MIT License
+
+GitHub: https://github.com/Melkias543
+DEMO :https://non-caffe-contract-university.vercel.app/
 
 ---
 
@@ -216,8 +217,6 @@ MIT License
 
 Melkias Teshoma
 Full-Stack Developer
-
-GitHub: https://github.com/your-username
 
 ---
 
